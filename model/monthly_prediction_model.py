@@ -24,11 +24,12 @@ class Monthly_Predicter(nn.Module):
         self.in_features = in_features
 
 
-    def forward(self, feats, output_len=1):
+    def forward(self, feats, output_len=1, test=False):
         """
         Args:
             feats: input tensor (B, total_month, # of feature)      EX) [B, 86, 7]
             target_shape: output shape (B, total_month, 1)          EX) [B, 86, 1]
+            refactoring 필요
         """
         full_inp_feats = feats
         # full_orig_feats = feats
@@ -45,9 +46,8 @@ class Monthly_Predicter(nn.Module):
                                         pred_so_far + feats.size(1),
                                         dtype=torch.long,
                                         device=feats.device)
-            
-            # print('gg')
-            # print(position_ids)
+            if test:
+                position_ids += torch.ones(1, dtype=torch.long, device=feats.device)
             outputs = self.gpt_model(inputs_embeds=feats,               # [8, 86, 512]
                                      past_key_values=past,              # 다음 sequence 계산할때 속도 높히기 위해 이전 output으로 나온 keyvalue를 다시 넣어줌
                                      position_ids=position_ids)

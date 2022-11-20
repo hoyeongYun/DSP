@@ -19,7 +19,7 @@ device = torch.device('cuda')
 split_strategy = 2
 batch_size = 4
 lr = 1e-5
-epochs = 200
+epochs = 400
 in_features = 7
 inter_dim = 512
 output_len=1
@@ -37,8 +37,6 @@ train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
 eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False)
 # test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-# print(train_dataset[4][0].shape)
-# print(train_dataset[4][1].shape)
 model = Monthly_Predicter(in_features=in_features, inter_dim=inter_dim, output_len=output_len).to(device)
 criterion = nn.MSELoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -49,8 +47,6 @@ avg_train_losses = []
 avg_eval_losses = []
  
 for epoch in tqdm(range(epochs)):
-    avg_cost = 0.0
-
     model.train()
     for batch_idx, samples in enumerate(train_loader):
         x_train, y_train = samples
@@ -73,19 +69,18 @@ for epoch in tqdm(range(epochs)):
     avg_eval_losses.append(eval_loss)
     
     epoch_len = len(str(epoch))
+    print()
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +
                      f'train_loss: {train_loss:.5f} ' +
                      f'valid_loss: {eval_loss:.5f}')
 
-# 642, 88, 1
-
 with torch.no_grad():
-    result = model(test_dataset.x, output_len=3)
+    result = model(test_dataset.x, output_len=3, test=True)        # 642, 88, 1
     result = result.cpu().detach().numpy()
 
 result = result.reshape(642, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/200_epoch_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/400_epoch_ver.csv', index=None)
 
 
 

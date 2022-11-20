@@ -48,7 +48,7 @@ def create_monthly_prediction_df(data_total_df: pd.DataFrame):
             temp_df[col_name] = cur_scaler.fit_transform(temp_df[col_name].to_numpy().reshape(-1,1))
 
     # create test_df
-    test_df = temp_df[temp_df['Month'] != 0].reset_index(drop=True)        # 642*86, 8
+    test_df = temp_df[temp_df['Month'] != 0].reset_index(drop=True)        # 642*86, 7
     # create data_monthly_df ( train + eval )
     target = temp_df[temp_df['Month'] != 0].Month_Retail_Size.reset_index(drop=True)
     data_monthly_df = temp_df[temp_df['Month'] != 86].reset_index(drop=True)
