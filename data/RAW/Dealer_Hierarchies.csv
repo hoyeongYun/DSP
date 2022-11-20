@@ -1,0 +1,643 @@
+Store,Store_Owner,Region_Level_1,Region_Level_2,Urban_Rural
+1,1,Eisenstadt-Umgebung,GWR,Urban
+2,1,Politischer Bezirk Güssing,GWR,Urban
+3,1,Politischer Bezirk Jennersdorf,GWR,Urban
+4,1,Politischer Bezirk Jennersdorf,GWR,Urban
+5,1,Politischer Bezirk Oberpullendorf,GWR,Urban
+6,1,Politischer Bezirk Oberwart,GWR,Urban
+7,1,Villach Stadt,PUF,Urban
+8,1,Politischer Bezirk Hermagor,MSD,Rural
+9,2,Politischer Bezirk Klagenfurt Land,SQI,Urban
+10,2,Politischer Bezirk Sankt Veit an der Glan,SQI,Urban
+11,3,Politischer Bezirk Spittal an der Drau,OOO,Rural
+12,4,Politischer Bezirk Villach Land,JHJ,Urban
+13,5,Politischer Bezirk Völkermarkt,KWA,Rural
+14,6,Politischer Bezirk Wolfsberg,QDA,Urban
+15,7,Politischer Bezirk Feldkirchen,WPH,Urban
+16,8,Krems an der Donau Stadt,FAC,Urban
+17,9,Sankt Pölten Stadt,GCG,Rural
+18,10,Wiener Neustadt Stadt,KCF,Rural
+19,10,Politischer Bezirk Amstetten,KCF,Urban
+20,10,Wiener Neustadt Stadt,KCF,Rural
+21,11,Politischer Bezirk Baden,NSX,Urban
+22,12,Politischer Bezirk Bruck an der Leitha,TPV,Urban
+23,11,Politischer Bezirk Gänserndorf,VSZ,Rural
+24,12,Politischer Bezirk Gmünd,TPV,Rural
+25,10,Wiener Neustadt Stadt,KCF,Rural
+26,13,Politischer Bezirk Hollabrunn,QDA,Urban
+27,14,Politischer Bezirk Horn,IRG,Urban
+28,14,Politischer Bezirk Korneuburg,IRG,Rural
+29,12,Politischer Bezirk Gmünd,TPV,Rural
+30,15,Politischer Bezirk Krems,TIG,Rural
+31,16,Politischer Bezirk Völkermarkt,KWA,Rural
+32,17,Politischer Bezirk Lilienfeld,VSZ,Urban
+33,16,Politischer Bezirk Melk,KWA,Urban
+34,18,Politischer Bezirk Mistelbach,LAV,Urban
+35,19,Sankt Pölten Stadt,GCG,Rural
+36,20,Politischer Bezirk Mödling,NLG,Rural
+37,21,Politischer Bezirk Neunkirchen,PPM,Urban
+38,22,Politischer Bezirk Sankt Pölten,NSX,Rural
+39,23,Politischer Bezirk Scheibbs,JOP,Urban
+40,20,Politischer Bezirk Tulln,NLG,Urban
+41,24,Politischer Bezirk Waidhofen an der Thaya,YIU,Urban
+42,25,Politischer Bezirk Wiener Neustadt,QZN,Rural
+43,26,Politischer Bezirk Zwettl,WPH,Rural
+44,20,Wels Stadt,MEO,Urban
+45,27,Politischer Bezirk Braunau am Inn,ICA,Urban
+46,27,Politischer Bezirk Eferding,ICA,Rural
+47,28,Politischer Bezirk Freistadt,TZF,Rural
+48,29,Politischer Bezirk Gmunden,LRJ,Urban
+49,29,Politischer Bezirk Grieskirchen,LRJ,Urban
+50,28,Politischer Bezirk Freistadt,TZF,Rural
+51,30,Politischer Bezirk Kirchdorf an der Krems,SQI,Urban
+52,31,Politischer Bezirk Linz-Land,TOH,Urban
+53,32,Politischer Bezirk Perg,TZF,Urban
+54,28,Politischer Bezirk Ried im Innkreis,TZF,Urban
+55,33,Politischer Bezirk Rohrbach,MDM,Rural
+56,34,Politischer Bezirk Schärding,WJO,Urban
+57,35,Politischer Bezirk Steyr-Land,VFN,Rural
+58,36,Politischer Bezirk Urfahr-Umgebung,WFJ,Urban
+59,8,Krems an der Donau Stadt,FAC,Urban
+60,37,Politischer Bezirk Vöcklabruck,IPP,Urban
+61,38,Wels-Land,LAV,Urban
+62,39,Politischer Bezirk Hallein,JLJ,Rural
+63,40,Politischer Bezirk Hallein,JLJ,Rural
+64,41,Politischer Bezirk Hallein,JLJ,Rural
+65,41,Politischer Bezirk Hallein,JLJ,Rural
+66,42,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+67,8,Krems an der Donau Stadt,FAC,Urban
+68,43,Politischer Bezirk Eferding,ICA,Rural
+69,44,Politischer Bezirk Steyr-Land,VFN,Rural
+70,45,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+71,46,Politischer Bezirk Tamsweg,UAY,Rural
+72,47,Politischer Bezirk Gänserndorf,VSZ,Rural
+73,48,Politischer Bezirk Zell am See,IYN,Urban
+74,49,Sankt Pölten Stadt,GCG,Rural
+75,50,Politischer Bezirk Steyr-Land,VFN,Rural
+76,51,Graz Stadt,MMJ,Rural
+77,30,Politischer Bezirk Kirchdorf an der Krems,SQI,Urban
+78,30,Politischer Bezirk Kirchdorf an der Krems,SQI,Urban
+79,30,Politischer Bezirk Kirchdorf an der Krems,SQI,Urban
+80,30,Politischer Bezirk Deutschlandsberg,JOP,Urban
+81,29,Politischer Bezirk Graz-Umgebung,LRJ,Urban
+82,30,Politischer Bezirk Leibnitz,SQI,Urban
+83,52,Politischer Bezirk Leoben,DNJ,Rural
+84,53,Politischer Bezirk Liezen,JOP,Urban
+85,8,Krems an der Donau Stadt,FAC,Urban
+86,8,Politischer Bezirk Murau,TPV,Urban
+87,4,Politischer Bezirk Voitsberg,SQI,Rural
+88,54,Politischer Bezirk Weiz,JHJ,Urban
+89,55,Politischer Bezirk Murtal,TPV,Urban
+90,51,Politischer Bezirk Bruck-Mürzzuschlag,MMJ,Urban
+91,54,Politischer Bezirk Hartberg-Fürstenfeld,JHJ,Urban
+92,51,Politischer Bezirk Südoststeiermark,MMJ,Urban
+93,32,Innsbruck Stadt,TZF,Urban
+94,51,Politischer Bezirk Imst,MMJ,Urban
+95,51,Politischer Bezirk Innsbruck Land,MMJ,Urban
+96,51,Politischer Bezirk Bruck-Mürzzuschlag,MMJ,Urban
+97,56,Politischer Bezirk Kufstein,QDA,Urban
+98,51,Politischer Bezirk Bruck-Mürzzuschlag,MMJ,Urban
+99,51,Politischer Bezirk Landeck,MMJ,Urban
+100,51,Politischer Bezirk Lienz,QZN,Urban
+101,57,Politischer Bezirk Reutte,WJO,Urban
+102,22,Politischer Bezirk Bludenz,MEO,Urban
+103,32,Innsbruck Stadt,TZF,Urban
+104,58,Politischer Bezirk Bregenz,PUF,Rural
+105,58,Politischer Bezirk Feldkirch,PUF,Urban
+106,55,Politischer Bezirk Murtal,TPV,Urban
+107,59,Graz Stadt,MMJ,Rural
+108,38,Salzburg Stadt,LAV,Urban
+109,60,Politischer Bezirk Kitzbühel,ICA,Urban
+110,61,Politischer Bezirk Dornbirn,TZF,Urban
+111,61,Politischer Bezirk Wien (Stadt),SMM,Urban
+112,61,Rust Stadt,UAY,Urban
+113,62,Politischer Bezirk Mattersburg,FAC,Urban
+114,63,Politischer Bezirk Neusiedl am See,KTR,Urban
+115,64,Politischer Bezirk Schwaz,FAC,Urban
+116,65,Politischer Bezirk Eferding,ICA,Rural
+117,54,Steyr Stadt,IRA,Urban
+118,66,Politischer Bezirk Eferding,ICA,Rural
+119,22,Linz Stadt,NSX,Urban
+120,22,Linz Stadt,NSX,Urban
+121,28,Politischer Bezirk Ried im Innkreis,TZF,Urban
+122,28,Klagenfurt am Wörthersee,TZF,Urban
+123,22,Waidhofen an der Ybbs Stadt,NSX,Urban
+124,67,Eisenstadt Stadt,TIF,Rural
+125,68,Hainaut,YIU,Urban
+126,69,Liège,YIU,Urban
+127,62,Luxembourg,FAC,Urban
+128,46,Eisenstadt Stadt,TIF,Rural
+129,70,Namur,MSD,Urban
+130,71,Bruxelles (19 communes),YIU,Urban
+131,72,Anvers,EPM,Urban
+132,73,Brabant Flamand,DNC,Rural
+133,38,Limbourg,LAV,Urban
+134,74,Flandre-Orientale,KTR,Urban
+135,38,Limbourg,LAV,Urban
+136,38,Flandre-Occidentale,LAV,Rural
+137,75,Politischer Bezirk Sankt Pölten,NSX,Rural
+138,76,Politischer Bezirk Steyr-Land,VFN,Rural
+139,77,Brabant Wallon,QDA,Urban
+140,78,Mladá Boleslav,FAC,Urban
+141,79,Nymburk,YIU,Urban
+142,80,Praha-východ,QDA,Rural
+143,81,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+144,28,Politischer Bezirk Ried im Innkreis,TZF,Urban
+145,28,Politischer Bezirk Ried im Innkreis,TZF,Urban
+146,82,Politischer Bezirk Wiener Neustadt,QZN,Rural
+147,83,Flandre-Occidentale,LAV,Rural
+148,80,Praha-západ,QDA,Urban
+149,80,Příbram,QDA,Urban
+150,84,Rakovník,APM,Urban
+151,85,Děčín,NLX,Urban
+152,85,Chomutov,NLX,Urban
+153,86,Litoměřice,NGO,Rural
+154,87,Louny,KTR,Rural
+155,7,Flandre-Occidentale,LAV,Rural
+156,7,Flandre-Occidentale,LAV,Rural
+157,88,Most,WFJ,Urban
+158,89,Politischer Bezirk Spittal an der Drau,OOO,Rural
+159,89,Teplice,JHJ,Urban
+160,89,Ústí nad Labem,JHJ,Urban
+161,76,Politischer Bezirk Eferding,ICA,Rural
+162,76,Zlín,VFN,Urban
+163,90,Kroměříž,DHA,Urban
+164,79,Uherské Hradiště,YIU,Urban
+165,76,Politischer Bezirk Steyr-Land,VFN,Rural
+166,38,Wels-Land,LAV,Urban
+167,91,Vsetín,WPH,Urban
+168,74,Strakonice,KTR,Urban
+169,92,Tábor,VSZ,Urban
+170,93,Praha-východ,QDA,Rural
+171,94,Pelhřimov,SQI,Urban
+172,95,Havlíčkův Brod,QDA,Urban
+173,95,Praha-východ,QDA,Rural
+174,96,Jihlava,JLJ,Urban
+175,97,Třebíč,SKS,Urban
+176,97,Třebíč,SKS,Urban
+177,97,Žďár nad Sázavou,SKS,Rural
+178,97,Žďár nad Sázavou,SKS,Rural
+179,98,Cheb,UAY,Urban
+180,97,Karlovy Vary,SKS,Urban
+181,97,Žďár nad Sázavou,SKS,Rural
+182,97,Sokolov,SKS,Urban
+183,97,Hradec Králové,SKS,Urban
+184,99,Jičín,WFJ,Urban
+185,100,Náchod,VSZ,Urban
+186,101,Rychnov nad Kněžnou,RSL,Urban
+187,102,Trutnov,LAV,Urban
+188,68,Česká Lípa,YIU,Urban
+189,22,Waidhofen an der Ybbs Stadt,NSX,Urban
+190,101,Jablonec nad Nisou,RSL,Urban
+191,22,Liberec,MEO,Rural
+192,101,Semily,UIS,Urban
+193,101,Prostějov,WFJ,Urban
+194,68,Olomouc,YIU,Urban
+195,69,Přerov,YIU,Rural
+196,69,Přerov,YIU,Rural
+197,103,Šumperk,JHR,Urban
+198,104,Jeseník,RUN,Urban
+199,105,Liberec,MEO,Rural
+200,38,Flandre-Occidentale,LAV,Rural
+201,106,Politischer Bezirk Gmünd,TPV,Rural
+202,107,Bruntál,JHJ,Urban
+203,108,Frýdek-Místek,LAV,Urban
+204,109,Politischer Bezirk Rohrbach,MDM,Rural
+205,110,Karviná,LRJ,Urban
+206,110,Nový Jičín,LRJ,Rural
+207,110,Nový Jičín,LRJ,Rural
+208,111,Sankt Pölten Stadt,GCG,Rural
+209,112,Politischer Bezirk Gmünd,TPV,Rural
+210,55,Politischer Bezirk Murtal,TPV,Urban
+211,55,Opava,TPV,Urban
+212,55,Ostrava-město,TPV,Urban
+213,113,Chrudim,ICA,Urban
+214,38,Pardubice,LAV,Urban
+215,114,Svitavy,AAR,Urban
+216,38,Ústí nad Orlicí,LAV,Urban
+217,115,Politischer Bezirk Wiener Neustadt,QZN,Rural
+218,116,Sankt Pölten Stadt,GCG,Rural
+219,117,Domažlice,QDA,Urban
+220,118,Nový Jičín,LRJ,Rural
+221,119,Klatovy,NGO,Urban
+222,119,Plzeň-město,NGO,Urban
+223,120,Plzeň-jih,XEG,Rural
+224,92,Plzeň-sever,VSZ,Urban
+225,92,Rokycany,VSZ,Urban
+226,92,Politischer Bezirk Gänserndorf,VSZ,Rural
+227,121,Louny,KTR,Rural
+228,122,Praha-východ,QDA,Rural
+229,123,Tachov,ICA,Urban
+230,124,Benešov,UQM,Rural
+231,125,Beroun,WPH,Urban
+232,126,Politischer Bezirk Steyr-Land,VFN,Rural
+233,127,Krems an der Donau Stadt,FAC,Urban
+234,128,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+235,129,Politischer Bezirk Eferding,ICA,Rural
+236,129,Chrudim,ICA,Urban
+237,92,Tábor,VSZ,Urban
+238,92,Tábor,VSZ,Urban
+239,58,Politischer Bezirk Bregenz,PUF,Rural
+240,32,Innsbruck Stadt,TZF,Urban
+241,130,Kladno,MSD,Urban
+242,52,Politischer Bezirk Leoben,DNJ,Rural
+243,131,Kolín,TIG,Urban
+244,71,Kutná Hora,YIU,Urban
+245,68,Mělník,YIU,Urban
+246,132,Graz Stadt,MMJ,Rural
+247,133,Politischer Bezirk Hermagor,MSD,Rural
+248,134,Žďár nad Sázavou,SKS,Rural
+249,134,Žďár nad Sázavou,SKS,Rural
+250,135,Benešov,UQM,Rural
+251,68,Hlavní město Praha,JHR,Urban
+252,136,Blansko,FAC,Rural
+253,137,Brno-město,JLJ,Urban
+254,89,Brno-venkov,DHA,Rural
+255,89,Ústí nad Labem,JHJ,Urban
+256,89,Břeclav,JHJ,Rural
+257,8,Krems an der Donau Stadt,FAC,Urban
+258,138,Politischer Bezirk Korneuburg,IRG,Rural
+259,19,Sankt Pölten Stadt,GCG,Rural
+260,19,Sankt Pölten Stadt,GCG,Rural
+261,139,Hodonín,QZN,Urban
+262,139,Politischer Bezirk Wiener Neustadt,QZN,Rural
+263,33,Vyškov,MDM,Urban
+264,33,Politischer Bezirk Rohrbach,MDM,Rural
+265,33,Politischer Bezirk Rohrbach,MDM,Rural
+266,140,Znojmo,NGO,Urban
+267,141,Politischer Bezirk Eferding,ICA,Rural
+268,69,České Budějovice,YIU,Urban
+269,142,Český Krumlov,NSX,Urban
+270,142,Český Krumlov,NSX,Urban
+271,142,Jindřichův Hradec,TPV,Urban
+272,143,Písek,WPH,Urban
+273,144,Litoměřice,NGO,Rural
+274,145,Politischer Bezirk Mödling,NLG,Rural
+275,146,Prachatice,VSZ,Urban
+276,111,Sankt Pölten Stadt,GCG,Rural
+277,147,Copenhagen,GCG,Urban
+278,114,Frederiksberg Kommune,AAR,Urban
+279,90,Hvidovre Kommune,APM,Urban
+280,148,Politischer Bezirk Zwettl,WPH,Rural
+281,149,Fredensborg Kommune,NLG,Urban
+282,150,Politischer Bezirk Zwettl,WPH,Rural
+283,151,Politischer Bezirk Baden,NSX,Urban
+284,142,Politischer Bezirk Sankt Pölten,NSX,Rural
+285,152,Politischer Bezirk Gänserndorf,VSZ,Rural
+286,153,Helsingør Kommune,AAR,Urban
+287,102,Syddjurs Kommune,LAV,Urban
+288,148,Politischer Bezirk Zwettl,WPH,Rural
+289,148,Politischer Bezirk Zwettl,WPH,Rural
+290,71,Silkeborg Kommune,YIU,Urban
+291,154,Ringkøbing-Skjern Kommune,QDA,Urban
+292,154,Praha-východ,QDA,Rural
+293,155,Skive Kommune,PPM,Urban
+294,156,Morsø Kommune,RUN,Urban
+295,157,Litoměřice,NGO,Rural
+296,101,Brønderslev Kommune,WFJ,Urban
+297,158,Vesthimmerland Kommune,GCG,Urban
+298,158,Sankt Pölten Stadt,GCG,Rural
+299,34,Læso Kommune,WJO,Urban
+300,159,Benešov,UQM,Rural
+301,103,Hjørring Kommune,YIU,Urban
+302,160,Politischer Bezirk Eferding,ICA,Rural
+303,27,Chrudim,ICA,Urban
+304,27,Politischer Bezirk Eferding,ICA,Rural
+305,161,Køge Kommune,SKS,Urban
+306,89,Slagelse Kommune,OOO,Urban
+307,162,Litoměřice,NGO,Rural
+308,163,Sorø Kommune,WPH,Urban
+309,164,Politischer Bezirk Korneuburg,IRG,Rural
+310,165,Politischer Bezirk Eferding,ICA,Rural
+311,166,Lejre Kommune,SQI,Urban
+312,20,Politischer Bezirk Mödling,NLG,Rural
+313,167,Blansko,FAC,Rural
+314,167,Lolland Kommune,FAC,Urban
+315,167,Næstved Kommune,FAC,Urban
+316,168,Benešov,UQM,Rural
+317,167,Vordingborg Kommune,LRJ,Urban
+318,20,Faaborg-Midtfyn Kommune,TPV,Urban
+319,167,Nyborg Kommune,LRJ,Urban
+320,169,Politischer Bezirk Krems,TIG,Rural
+321,20,Odense Kommune,NLG,Urban
+322,170,Břeclav,JHJ,Rural
+323,170,Billund Kommune,JHJ,Urban
+324,20,Blansko,FAC,Rural
+325,171,Politischer Bezirk Korneuburg,IRG,Rural
+326,95,Politischer Bezirk Kufstein,QDA,Urban
+327,28,Tønder Kommune,TZF,Urban
+328,172,Politischer Bezirk Gmünd,TPV,Rural
+329,173,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+330,173,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+331,173,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+332,174,Varde Kommune,UQM,Urban
+333,175,Plzeň-jih,XEG,Rural
+334,175,Kolding Kommune,XEG,Urban
+335,175,Plzeň-jih,XEG,Rural
+336,176,Politischer Bezirk Steyr-Land,VFN,Rural
+337,177,Louny,KTR,Rural
+338,95,Københavns Kommune,QDA,Urban
+339,95,Gladsaxe Municipality,QDA,Urban
+340,167,Vordingborg Kommune,LRJ,Urban
+341,167,Ishøj Kommune,FAC,Urban
+342,178,Politischer Bezirk Steyr-Land,VFN,Rural
+343,179,Litoměřice,NGO,Rural
+344,170,Allerød Kommune,JHJ,Urban
+345,180,Bornholm Kommune,KTR,Urban
+346,181,Favrskov Kommune,QDA,Urban
+347,182,Aarhus Kommune,LAV,Urban
+348,183,Hedensted Kommune,TOH,Urban
+349,184,Ålborg Kommune,PUF,Urban
+350,185,Roskilde Kommune,RUN,Rural
+351,186,Politischer Bezirk Gmünd,TPV,Rural
+352,187,Eisenstadt Stadt,TIF,Rural
+353,131,Odsherred Kommune,TIG,Urban
+354,17,Faxe Kommune,TPV,Urban
+355,131,Guldborgsund Kommune,TIG,Urban
+356,92,Middelfart Kommune,VSZ,Urban
+357,163,Vejle Kommune,WPH,Urban
+358,163,Hillerød Kommune,WPH,Urban
+359,163,Sorø Kommune,WPH,Urban
+360,16,Herning Kommune,KWA,Urban
+361,188,Holstebro Kommune,VIL,Urban
+362,189,Ikast-Brande Kommune,WPH,Urban
+363,189,Frederikshavn Kommune,LAV,Urban
+364,89,Politischer Bezirk Spittal an der Drau,OOO,Rural
+365,190,Solrød Kommune,QDA,Urban
+366,64,Assens Kommune,KTR,Urban
+367,37,Kerteminde Kommune,IPP,Urban
+368,191,Politischer Bezirk Hermagor,MSD,Rural
+369,192,Benešov,UQM,Rural
+370,29,Svendborg Kommune,TIF,Urban
+371,29,Nordfyns Kommune,LRJ,Urban
+372,29,Nordfyns Kommune,LRJ,Urban
+373,193,Politischer Bezirk Zwettl,WPH,Rural
+374,194,Louny,KTR,Rural
+375,194,Louny,KTR,Rural
+376,71,Kutná Hora,YIU,Urban
+377,195,Politischer Bezirk Gänserndorf,VSZ,Rural
+378,195,Politischer Bezirk Gänserndorf,VSZ,Rural
+379,196,Louny,KTR,Rural
+380,197,Politischer Bezirk Steyr-Land,VFN,Rural
+381,198,Langeland Kommune,DNJ,Urban
+382,199,Chrudim,ICA,Urban
+383,200,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+384,201,Politischer Bezirk Zwettl,WPH,Rural
+385,85,Lemvig Kommune,AAR,Urban
+386,202,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+387,202,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+388,203,Chrudim,ICA,Urban
+389,204,Norddjurs Kommune,QDA,Urban
+390,205,Randers Kommune,NSX,Urban
+391,206,Politischer Bezirk Liezen,JOP,Urban
+392,74,Strakonice,KTR,Urban
+393,203,Chrudim,ICA,Urban
+394,203,Chrudim,ICA,Urban
+395,207,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+396,207,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+397,207,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+398,74,Louny,KTR,Rural
+399,74,Viborg Kommune,KTR,Urban
+400,205,Randers Kommune,NSX,Urban
+401,208,Politischer Bezirk Salzburg-Umgebung,PPM,Rural
+402,209,Rebild Kommune,TZF,Urban
+403,205,Politischer Bezirk Sankt Pölten,NSX,Rural
+404,205,Mariagerfjord Kommune,NSX,Urban
+405,205,Stevns Kommune,NSX,Urban
+406,210,Læso Kommune,WJO,Urban
+407,205,Sønderborg Kommune,NSX,Urban
+408,211,Vejen Kommune,NLX,Urban
+409,212,Litoměřice,NGO,Rural
+410,213,Politischer Bezirk Steyr-Land,VFN,Rural
+411,198,Aabenraa Kommune,IKF,Urban
+412,214,Politischer Bezirk Hermagor,MSD,Rural
+413,215,Gentofte Kommune,TZF,Urban
+414,215,Albertslund Kommune,AAR,Urban
+415,215,Furesø Kommune,NLX,Urban
+416,215,Egedal Kommune,JOP,Urban
+417,215,Gribskov Kommune,NLX,Rural
+418,215,Jammerbugt Kommune,WJO,Urban
+419,215,Kalundborg Kommune,JOP,Urban
+420,216,Aalborg Kommune,TZF,Urban
+421,216,Rudersdal Kommune,TZF,Urban
+422,217,Holbæk Kommune,PPM,Urban
+423,185,Roskilde Kommune,RUN,Rural
+424,218,Ærø Kommune,SQI,Urban
+425,219,Louny,KTR,Rural
+426,219,Louny,KTR,Rural
+427,137,Struer Kommune,JLJ,Urban
+428,61,Rust Stadt,UAY,Urban
+429,219,Odder Kommune,KTR,Urban
+430,220,Aabenraa Kommune,IKF,Urban
+431,35,Politischer Bezirk Hermagor,MSD,Rural
+432,45,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+433,64,Blansko,FAC,Rural
+434,214,Politischer Bezirk Hermagor,MSD,Rural
+435,221,Louny,KTR,Rural
+436,222,Haderslev Kommune,VFN,Urban
+437,223,Louny,KTR,Rural
+438,103,Fredericia Kommune,YIU,Urban
+439,103,Dragør Kommune,YIU,Urban
+440,221,Louny,KTR,Rural
+441,224,Flandre-Occidentale,LAV,Rural
+442,216,Horsens Kommune,TZF,Urban
+443,48,Greve Kommune,IYN,Urban
+444,137,Esbjerg Kommune,JLJ,Urban
+445,216,Ballerup Kommune,TZF,Urban
+446,216,Thisted Kommune,TZF,Urban
+447,216,Brøndby Kommune,TZF,Urban
+448,216,Høje-Taastrup Kommune,TZF,Urban
+449,216,Tårnby Kommune,TZF,Urban
+450,216,Politischer Bezirk Freistadt,TZF,Rural
+451,216,Rødovre Kommune,TZF,Urban
+452,225,Politischer Bezirk Hermagor,MSD,Rural
+453,226,Politischer Bezirk Freistadt,TZF,Rural
+454,18,Politischer Bezirk Zell am See,IYN,Urban
+455,18,Halsnæs Kommune,IYN,Urban
+456,18,Samsø Kommune,LAV,Urban
+457,18,Flandre-Occidentale,LAV,Rural
+458,227,Benešov,UQM,Rural
+459,228,Hvidovre Kommune,APM,Urban
+460,48,Greve Kommune,IYN,Urban
+461,229,Louny,KTR,Rural
+462,48,Politischer Bezirk Zell am See,IYN,Urban
+463,230,Flandre-Occidentale,LAV,Rural
+464,231,Nový Jičín,LRJ,Rural
+465,124,Ringsted Kommune,UQM,Urban
+466,232,Hørsholm Kommune,WJO,Urban
+467,233,Benešov,UQM,Rural
+468,230,Flandre-Occidentale,LAV,Rural
+469,234,Politischer Bezirk Spittal an der Drau,OOO,Rural
+470,235,Eisenstadt Stadt,TIF,Rural
+471,236,Vallensbæk Kommune,VIL,Urban
+472,237,Frederikssund Kommune,OOO,Urban
+473,238,Litoměřice,NGO,Rural
+474,239,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+475,240,Politischer Bezirk Korneuburg,IRG,Rural
+476,241,Glostrup Kommune,JLJ,Urban
+477,242,Praha-východ,QDA,Rural
+478,221,Politischer Bezirk Neusiedl am See,KTR,Urban
+479,243,Skanderborg Kommune,LAV,Urban
+480,216,Herlev Kommune,TZF,Urban
+481,216,Politischer Bezirk Freistadt,TZF,Rural
+482,244,Louny,KTR,Rural
+483,245,Litoměřice,NGO,Rural
+484,216,Ballerup Kommune,TZF,Urban
+485,90,Hvidovre Kommune,APM,Urban
+486,246,Litoměřice,NGO,Rural
+487,247,Roskilde Kommune,RUN,Rural
+488,248,Litoměřice,NGO,Rural
+489,248,Lyngby-Tårbæk Kommune,NGO,Urban
+490,248,Fanø Kommune,NGO,Urban
+491,107,Bruntál,JHJ,Urban
+492,102,Helsinki,NSX,Urban
+493,102,Trutnov,LAV,Urban
+494,249,Litoměřice,NGO,Rural
+495,102,Trutnov,LAV,Urban
+496,102,Flandre-Occidentale,LAV,Rural
+497,107,Porvoo,IRA,Urban
+498,107,Bruntál,JHJ,Urban
+499,91,Åboland-Turunmaa,WPH,Urban
+500,250,Politischer Bezirk Neusiedl am See,KTR,Urban
+501,250,Louny,KTR,Rural
+502,230,Politischer Bezirk Zwettl,WPH,Rural
+503,102,Flandre-Occidentale,LAV,Rural
+504,248,Litoměřice,NGO,Rural
+505,248,Salo,NGO,Urban
+506,251,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+507,109,Politischer Bezirk Rohrbach,MDM,Rural
+508,252,Turku,CMH,Rural
+509,253,Louny,KTR,Rural
+510,164,Vakka-Suomi,IRG,Urban
+511,254,Politischer Bezirk Hermagor,MSD,Rural
+512,240,Sankt Pölten Stadt,GCG,Rural
+513,218,Politischer Bezirk Voitsberg,SQI,Rural
+514,218,Loimaa,JOP,Rural
+515,218,Rauma,SQI,Urban
+516,255,Politischer Bezirk Zwettl,WPH,Rural
+517,256,Politischer Bezirk Eferding,ICA,Rural
+518,257,Litoměřice,NGO,Rural
+519,257,Litoměřice,NGO,Rural
+520,240,Sankt Pölten Stadt,GCG,Rural
+521,147,Pori,GCG,Urban
+522,147,Copenhagen,GCG,Urban
+523,147,Pohjois-Satakunta,GCG,Urban
+524,147,Sankt Pölten Stadt,GCG,Rural
+525,258,Litoměřice,NGO,Rural
+526,4,Hämeenlinna,IRA,Urban
+527,4,Luoteis-Pirkanmaa,IRA,Urban
+528,259,Blansko,FAC,Rural
+529,4,Tampere,IRA,Urban
+530,223,Lahti,KTR,Urban
+531,260,Kotka-Hamina,WPH,Urban
+532,261,Politischer Bezirk Tamsweg,UAY,Rural
+533,262,Nový Jičín,LRJ,Rural
+534,263,Lappeenranta,GWR,Urban
+535,31,Imatra,TOH,Urban
+536,264,Politischer Bezirk Zwettl,WPH,Rural
+537,265,Mikkeli,NGO,Urban
+538,266,Savonlinna,QDA,Urban
+539,267,Strakonice,KTR,Urban
+540,268,Benešov,UQM,Rural
+541,269,Pieksämäki,NGO,Urban
+542,31,Ylä-Savo,PUF,Urban
+543,31,Kuopio,TOH,Urban
+544,270,Joensuu,IYN,Urban
+545,271,Politischer Bezirk Eferding,ICA,Rural
+546,210,Læso Kommune,WJO,Urban
+547,103,Dragør Kommune,YIU,Urban
+548,89,Keski-Karjala,JHJ,Urban
+549,272,Pielisen Karjala,THH,Rural
+550,273,Louny,KTR,Rural
+551,274,Nymburk,YIU,Urban
+552,274,Jyväskylä,YIU,Urban
+553,218,Keuruu,JOP,Urban
+554,143,Politischer Bezirk Zwettl,WPH,Rural
+555,275,Politischer Bezirk Sankt Pölten,NSX,Rural
+556,275,Politischer Bezirk Sankt Pölten,NSX,Rural
+557,266,Praha-východ,QDA,Rural
+558,276,Praha-východ,QDA,Rural
+559,277,Politischer Bezirk Eferding,ICA,Rural
+560,164,Jämsä,IRG,Urban
+561,164,Saarijärvi-Viitasaari,IRG,Urban
+562,278,Politischer Bezirk Eferding,ICA,Rural
+563,278,Politischer Bezirk Steyr-Land,VFN,Rural
+564,278,Suupohja,VFN,Urban
+565,88,Seinäjoki,QQS,Urban
+566,279,Ikast-Brande Kommune,WPH,Urban
+567,279,Ikast-Brande Kommune,WPH,Urban
+568,88,Kuusiokunnat,QQS,Rural
+569,118,Nový Jičín,LRJ,Rural
+570,250,Louny,KTR,Rural
+571,280,Chrudim,ICA,Urban
+572,55,Järviseutu,TPV,Urban
+573,12,Politischer Bezirk Bruck an der Leitha,TPV,Urban
+574,114,Frederiksberg Kommune,AAR,Urban
+575,280,Vaasa,KTR,Urban
+576,281,Litoměřice,NGO,Rural
+577,281,Politischer Bezirk Eferding,ICA,Rural
+578,281,Sydösterbotten,ICA,Urban
+579,282,Politischer Bezirk Steyr-Land,VFN,Rural
+580,45,Politischer Bezirk Sankt Johann im Pongau,VIL,Rural
+581,45,Benešov,UQM,Rural
+582,283,Litoměřice,NGO,Rural
+583,283,Politischer Bezirk Eferding,ICA,Rural
+584,283,Politischer Bezirk Eferding,ICA,Rural
+585,281,Politischer Bezirk Eferding,ICA,Rural
+586,210,Kokkola,WJO,Urban
+587,284,Flandre-Orientale,KTR,Urban
+588,54,Politischer Bezirk Hartberg-Fürstenfeld,JHJ,Urban
+589,280,Chrudim,ICA,Urban
+590,285,Oulu,TOH,Urban
+591,286,Politischer Bezirk Korneuburg,IRG,Rural
+592,287,Politischer Bezirk Gmünd,TPV,Rural
+593,288,Politischer Bezirk Voitsberg,SQI,Rural
+594,289,Litoměřice,NGO,Rural
+595,289,Litoměřice,NGO,Rural
+596,290,Oulunkaari,NLG,Urban
+597,290,Haapavesi-Siikalatva,NLG,Urban
+598,103,Dragør Kommune,YIU,Urban
+599,291,Ylivieska,JOP,Urban
+600,291,Kehys-Kainuu,JOP,Urban
+601,124,Benešov,UQM,Rural
+602,292,Kajaani,TIG,Urban
+603,289,Litoměřice,NGO,Rural
+604,293,Litoměřice,NGO,Rural
+605,294,Politischer Bezirk Steyr-Land,VFN,Rural
+606,295,Rovaniemi,OOO,Urban
+607,296,Nový Jičín,LRJ,Rural
+608,297,Flandre-Occidentale,LAV,Rural
+609,34,Kemi-Tornio,WJO,Urban
+610,34,Itä-Lappi,WJO,Urban
+611,295,Tunturi-Lappi,OOO,Urban
+612,164,Politischer Bezirk Korneuburg,IRG,Rural
+613,164,Raaseporin,IRG,Urban
+614,34,Loviisa,WJO,Urban
+615,298,Politischer Bezirk Spittal an der Drau,OOO,Rural
+616,211,Riihimäki,AAR,Urban
+617,211,Forssa,AAR,Urban
+618,211,Gribskov Kommune,NLX,Rural
+619,77,Praha-východ,QDA,Rural
+620,124,Benešov,UQM,Rural
+621,294,Politischer Bezirk Steyr-Land,VFN,Rural
+622,294,Politischer Bezirk Steyr-Land,VFN,Rural
+623,291,Etelä-Pirkanmaa,WJO,Urban
+624,291,Lounais-Pirkanmaa,WJO,Urban
+625,28,Politischer Bezirk Ried im Innkreis,TZF,Urban
+626,46,Ylä-Pirkanmaa,TIF,Urban
+627,46,Kouvola,UAY,Urban
+628,46,Koillis-Savo,TIF,Urban
+629,46,Eisenstadt Stadt,TIF,Rural
+630,299,Litoměřice,NGO,Rural
+631,292,Kajaani,TIG,Urban
+632,211,Varkaus,NLG,Urban
+633,211,Gribskov Kommune,NLX,Rural
+634,211,Sisä-Savo,NLG,Urban
+635,295,Politischer Bezirk Spittal an der Drau,OOO,Rural
+636,295,Jakobstadsregionen,OOO,Urban
+637,295,Raahe,OOO,Urban
+638,132,Graz Stadt,MMJ,Rural
+639,300,Politischer Bezirk Eferding,ICA,Rural
+640,301,Benešov,UQM,Rural
+641,4,Nivala-Haapajärvi,IRA,Urban
+642,74,Koillismaa,KTR,Urban
