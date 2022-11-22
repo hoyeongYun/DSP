@@ -22,7 +22,7 @@ device = torch.device('cuda')
 split_strategy = 2
 batch_size = 4
 lr = 1e-3
-epochs = 50
+epochs = 20
 in_features = 8*18
 out_features = 18
 inter_dim = 1024
@@ -34,8 +34,8 @@ train_eval_df, test_df, preprocs = create_ete_prediction_df(data_df)
 # split data
 train_df, eval_df = train_eval_df_split(df=train_eval_df, strategy=split_strategy, preprocs=preprocs)
 # dataset
-train_dataset = End_To_End_Dataset(df=train_df, device=device)
-eval_dataset = End_To_End_Dataset(df=eval_df, device=device)
+train_dataset = End_To_End_Dataset(df=train_eval_df, device=device)
+# eval_dataset = End_To_End_Dataset(df=eval_df, device=device)
 test_dataset = End_To_End_Dataset(df=test_df, device=device, mode='test')
 # dataloader
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
@@ -61,16 +61,14 @@ for epoch in tqdm(range(epochs)):
         optimizer.step()
         train_losses.append(loss.item())
 
-    model.eval()
-    for x_eval, y_eval, store_ids in eval_loader:
-        outputs = model(x_eval, store_ids)
-        loss = criterion(outputs, y_eval)
-        eval_losses.append(loss.item())
+    # model.eval()
+    # for x_eval, y_eval, store_ids in eval_loader:
+    #     outputs = model(x_eval, store_ids)
+    #     loss = criterion(outputs, y_eval)
+    #     eval_losses.append(loss.item())
 
     train_loss = np.average(train_losses)
-    eval_loss = np.average(eval_losses)
-    avg_train_losses.append(train_loss)
-    avg_eval_losses.append(eval_loss)
+    # eval_loss = np.average(eval_losses)
     
     epoch_len = len(str(epoch))
     print()
@@ -84,7 +82,7 @@ with torch.no_grad():
 
 result = result.reshape(642, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/ete/ete_1e3_50_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/ete/ete_1e3_20_ver.csv', index=None)
 
 
 
