@@ -17,7 +17,6 @@ def create_ete_prediction_df(df: pd.DataFrame):
     numerical_cols = ['Store_Owner', 'Latitude', 'Longitude', 'Industry_Size', 
                     'Retail_Size', 'Target_3_Month_Retail_Sum']
     cat_num_cols = ['Item_Type', 'Item']
-
     preprocs = {'LabelEncoder':{}, 
                 'MinMaxScaler':{}}
     for col_name in categorical_cols + numerical_cols + cat_num_cols:

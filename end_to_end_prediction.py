@@ -22,7 +22,7 @@ device = torch.device('cuda')
 split_strategy = 2
 batch_size = 4
 lr = 1e-5
-epochs = 500
+epochs = 650
 in_features = 8*18
 out_features = 18
 inter_dim = 1024
@@ -84,7 +84,7 @@ with torch.no_grad():
 
 result = result.reshape(642, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/ete/ete_test_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/ete/ete_650_ver.csv', index=None)
 
 
 
