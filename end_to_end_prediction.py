@@ -39,7 +39,7 @@ train_dataset = End_To_End_Dataset(df=train_eval_df, device=device)
 test_dataset = End_To_End_Dataset(df=test_df, device=device, mode='test')
 # dataloader
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
-eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False)
+# eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False)
 # test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 model = End_To_End_Predicter(in_features=in_features, out_features=out_features, inter_dim=inter_dim, output_len=output_len).to(device)
@@ -47,9 +47,9 @@ criterion = nn.MSELoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
 train_losses = []
-eval_losses = []
+# eval_losses = []
 avg_train_losses = []
-avg_eval_losses = []
+# avg_eval_losses = []
 
 for epoch in tqdm(range(epochs)):
     model.train()
@@ -73,8 +73,8 @@ for epoch in tqdm(range(epochs)):
     epoch_len = len(str(epoch))
     print()
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +
-                     f'train_loss: {train_loss:.5f} ' +
-                     f'valid_loss: {eval_loss:.5f}')
+                     f'train_loss: {train_loss:.8f}')
+                    #   ' + f'valid_loss: {eval_loss:.5f}')
 
 with torch.no_grad():
     result = model(test_dataset.x, test_dataset.store_ids, test=True)        # 642, 88, 1
@@ -82,7 +82,7 @@ with torch.no_grad():
 
 result = result.reshape(642, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/ete/ete_1e3_20_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/ete/full_train_1e3_100_ver.csv', index=None)
 
 
 
