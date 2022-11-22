@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 import transformers
 from model.monthly_prediction_model import Monthly_Predicter
+from utils.utils import load_data
 from dataset.monthly_prediction_dataset import Monthly_Prediction_Dataset
 from dataset.data_preprocessing import load_data, create_monthly_prediction_df, split_monthly_prediction_df
 from tqdm import tqdm
@@ -19,7 +20,7 @@ device = torch.device('cuda')
 split_strategy = 2
 batch_size = 4
 lr = 1e-5
-epochs = 600
+epochs = 450
 in_features = 7
 inter_dim = 512
 output_len=1
@@ -80,7 +81,7 @@ with torch.no_grad():
 
 result = result.reshape(642, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/600_epoch_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/450_epoch_ver.csv', index=None)
 
 
 

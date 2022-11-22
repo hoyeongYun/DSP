@@ -3,11 +3,6 @@ import numpy as np
 from torch.utils.data import  Dataset
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 
-def load_data(path: str):
-    # path = '/workspace/DSP/data/PREPROCESSED/Data_Total.csv'
-    data_total_df = pd.read_csv(path)
-    return data_total_df
-
 def create_monthly_prediction_df(data_total_df: pd.DataFrame):
     """
     process data required at monthly prediction task
