@@ -4,7 +4,7 @@ import transformers
 import math
 
 class StoreID_Encoding(nn.Module):
-    def __init__(self, input_dim, dropout=0.1, store_max_len=642, total_months=84):
+    def __init__(self, input_dim, dropout=0.0, store_max_len=642, total_months=84):
         super().__init__()
         self.dropout = nn.Dropout(p=dropout)
         self.input_dim = input_dim

@@ -11,34 +11,29 @@ def create_ete_prediction_df(df: pd.DataFrame):
     '''
     store는 store_id_embedding으로 따로 처리
     '''
-    temp_df = df.copy()
+    target_col = ['Target_3_Month_Retail_Sum']
+    req_cols = ['Month', 'Store', 'Store_Owner', 'Urban_Rural', 'Location_Cluster', 'Item_Type', 'Item', 'Industry_Size', 'Retail_Size', 'Target_3_Month_Retail_Sum']
+    temp_df = df[req_cols].copy()
     # preprocs
     categorical_cols = ['Month', 'Urban_Rural']
-    numerical_cols = ['Store_Owner', 'Latitude', 'Longitude', 'Industry_Size', 
+    numerical_cols = ['Store_Owner', 'Location_Cluster', 'Industry_Size', 
                     'Retail_Size', 'Target_3_Month_Retail_Sum']
-    cat_num_cols = ['Item_Type', 'Item']
+    dummy_cols = ['Item_Type', 'Item']
     preprocs = {'LabelEncoder':{}, 
                 'MinMaxScaler':{}}
-    for col_name in categorical_cols + numerical_cols + cat_num_cols:
+    for col_name in categorical_cols + numerical_cols:
         if col_name in categorical_cols:
             preprocs['LabelEncoder'][col_name] = LabelEncoder()
             cur_encoder = preprocs['LabelEncoder'][col_name]
             temp_df[col_name] = preprocs['LabelEncoder'][col_name].fit_transform(temp_df[col_name])
-        elif col_name in numerical_cols:
-            preprocs['MinMaxScaler'][col_name] = MinMaxScaler()
-            cur_scaler = preprocs['MinMaxScaler'][col_name]
-            temp_df[col_name] = cur_scaler.fit_transform(temp_df[col_name].to_numpy().reshape(-1,1))
         else:
-            preprocs['LabelEncoder'][col_name] = LabelEncoder()
-            cur_encoder = preprocs['LabelEncoder'][col_name]
-            temp_df[col_name] = preprocs['LabelEncoder'][col_name].fit_transform(temp_df[col_name])
             preprocs['MinMaxScaler'][col_name] = MinMaxScaler()
             cur_scaler = preprocs['MinMaxScaler'][col_name]
             temp_df[col_name] = cur_scaler.fit_transform(temp_df[col_name].to_numpy().reshape(-1,1))
+    temp_df = pd.get_dummies(temp_df, columns=dummy_cols)
     # test_df
-    test_df = temp_df[(temp_df['Month'] != 0) & (temp_df['Month'] != 1) & (temp_df['Month'] != 2)].copy()
-    test_df = test_df.drop(columns=['Target_3_Month_Retail_Sum']).reset_index(drop=True)    # 642*84*18, month store 포함, target 미포함
-    # train_eval_df
+    test_df = temp_df[(temp_df['Month'] != 0) & (temp_df['Month'] != 1) & (temp_df['Month'] != 2)].copy().reset_index(drop=True)
+    # # train_eval_df
     train_eval_df = temp_df[(temp_df['Month'] != 84) & (temp_df['Month'] != 85) & (temp_df['Month'] != 86)].copy().reset_index(drop=True)
 
     return train_eval_df, test_df, preprocs

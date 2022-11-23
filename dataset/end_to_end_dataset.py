@@ -38,7 +38,7 @@ class End_To_End_Dataset(torch.utils.data.Dataset):
         self.device = device
         self.excepted_col = excepted_col
         self.target_col = target_col
-        self.req_cols = len(self.df.columns) - len(self.excepted_col) - len(self.target_col)
+        self.req_cols = len(self.df.columns) - len(self.excepted_col) - len(self.target_col)      
         if self.mode == 'train_eval':
             temp = df.drop(columns=self.excepted_col+self.target_col)
             temp = temp.to_numpy().reshape(-1, self.total_months, self.total_items*self.req_cols)
@@ -47,7 +47,7 @@ class End_To_End_Dataset(torch.utils.data.Dataset):
             temp = temp.to_numpy().reshape(-1, self.total_months, self.total_items)
             self.y = torch.FloatTensor(temp).to(self.device)
         else:
-            temp = df.drop(columns=self.excepted_col)
+            temp = df.drop(columns=self.excepted_col+self.target_col)
             temp = temp.to_numpy().reshape(-1, self.total_months, self.total_items*self.req_cols)
             self.x = torch.FloatTensor(temp).to(self.device)
             self.y = None
