@@ -17,10 +17,10 @@ class End_To_End_Dataset(torch.utils.data.Dataset):
                 y -> [self.len, 86, 1]
         
         excepted_col = ['Month', 'Store']   'Retail_Size' ablataion study
-        self.x: [B, 84, 7]
-        self.y: [B, 86, 1]
+        self.x: [B, 84, 18D]
+        self.y: [B, 84, 18]
         
-        at test mode -> 642, 86, 7
+        at test mode -> 642, 84, 18D
     '''
     def __init__(self, df: pd.DataFrame, 
                 device: torch.device, 
@@ -36,9 +36,9 @@ class End_To_End_Dataset(torch.utils.data.Dataset):
         self.total_items = total_items
         self.len = int(len(df) // (self.total_months*self.total_items))
         self.device = device
-        self.req_cols = 8
         self.excepted_col = excepted_col
         self.target_col = target_col
+        self.req_cols = len(self.df.columns) - len(self.excepted_col) - len(self.target_col)
         if self.mode == 'train_eval':
             temp = df.drop(columns=self.excepted_col+self.target_col)
             temp = temp.to_numpy().reshape(-1, self.total_months, self.total_items*self.req_cols)

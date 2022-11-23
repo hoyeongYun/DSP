@@ -23,7 +23,7 @@ split_strategy = 2
 batch_size = 4
 lr = 1e-3
 epochs = 600
-in_features = 8*18
+in_features = (29-3)*18
 out_features = 18
 inter_dim = 1024
 output_len=1
@@ -77,7 +77,7 @@ for epoch in tqdm(range(epochs)):
                     #   ' + f'valid_loss: {eval_loss:.5f}')
 
 with torch.no_grad():
-    result = model(test_dataset.x, test_dataset.store_ids, test=True)        # 642, 88, 1
+    result = model(test_dataset.x, test_dataset.store_ids, test=True)        # 642, 84, 18
     result = result.cpu().detach().numpy()
 
 result = result.reshape(642, -1)
