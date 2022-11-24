@@ -23,7 +23,6 @@ class StoreID_Encoding(nn.Module):
         x = x + self.se[store_ids.cpu().numpy(), :, :]
         return self.dropout(x)
 
-
 class End_To_End_Predicter(nn.Module):
     """gpt2 model for monthly prediction task"""
     def __init__(

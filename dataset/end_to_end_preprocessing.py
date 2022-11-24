@@ -10,6 +10,7 @@ from utils.utils import *
 def create_ete_prediction_df(df: pd.DataFrame):
     '''
     store는 store_id_embedding으로 따로 처리
+    필요한 row만 담아서 넘김
     '''
     target_col = ['Target_3_Month_Retail_Sum']
     req_cols = ['Month', 'Store', 'Store_Owner', 'Urban_Rural', 'Location_Cluster', 'Item_Type', 'Item', 'Industry_Size', 'Retail_Size', 'Target_3_Month_Retail_Sum']
