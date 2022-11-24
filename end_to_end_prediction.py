@@ -10,9 +10,9 @@ import transformers
 # from model.monthly_prediction_model import Monthly_Predicter
 from utils.utils import load_data
 from model.end_to_end_model import End_To_End_Predicter
-from dataset.end_to_end_dataset import End_To_End_Dataset
+from dataset.dataset.end_to_end_dataset import End_To_End_Dataset
 # from dataset.monthly_prediction_dataset import Monthly_Prediction_Dataset
-from dataset.end_to_end_preprocessing import create_ete_prediction_df, train_eval_df_split
+from dataset.preprocessing.end_to_end_preprocessing import create_ete_prediction_df, train_eval_df_split
 from tqdm import tqdm
 
 # args
@@ -22,7 +22,7 @@ device = torch.device('cuda')
 split_strategy = 2
 batch_size = 4
 lr = 1e-3
-epochs = 400
+epochs = 600
 in_features = (29-3)*18
 out_features = 18
 inter_dim = 1024

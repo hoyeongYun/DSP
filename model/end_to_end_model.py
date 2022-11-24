@@ -33,7 +33,7 @@ class End_To_End_Predicter(nn.Module):
         output_len: int = 1):
         super().__init__()
         self.encoder = nn.Linear(in_features, inter_dim, bias=False)     # ex) B, 84, 18D -> 1024
-        self.decoder = nn.Linear(inter_dim, out_features, bias=False)     # ex) B, 84, 1024 -> 18
+        self.decoder = nn.Linear(inter_dim, 1, bias=False)     # ex) B, 84, 1024 -> 18
         self.gpt_model = transformers.GPT2Model(
             transformers.GPT2Config(n_embd=inter_dim,
                                     vocab_size=in_features,
@@ -68,8 +68,8 @@ class End_To_End_Predicter(nn.Module):
                                         device=feats.device)
             if test:
                 position_ids = position_ids + (torch.ones_like(position_ids, dtype=torch.long, device=feats.device)*3)
-            outputs = self.gpt_model(inputs_embeds=feats,               # [8, 86, 512]
-                                     past_key_values=past,              # 다음 sequence 계산할때 속도 높히기 위해 이전 output으로 나온 keyvalue를 다시 넣어줌
+            outputs = self.gpt_model(inputs_embeds=feats,               
+                                     past_key_values=past,           
                                      position_ids=position_ids)
             last_hidden_state = outputs.last_hidden_state
             past = outputs.past_key_values
