@@ -21,11 +21,11 @@ DATA_PATH = '/workspace/DSP/data/PREPROCESSED/End_To_End_Data.csv'
 device = torch.device('cuda')
 # split_strategy = 2
 batch_size = 4
-lr = 1e-2
-epochs = 300
+lr = 1e-1
+epochs = 200
 # in_features = 26
 out_features = 1
-inter_dim = 1024
+inter_dim = 2048
 output_len=1
 
 # data preprocessing
@@ -76,4 +76,4 @@ with torch.no_grad():
 
 result = result.reshape(351, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/per_item/1e2_300_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/per_item/1e1_200_ver.csv', index=None)
