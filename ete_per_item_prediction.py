@@ -21,8 +21,8 @@ DATA_PATH = '/workspace/DSP/data/PREPROCESSED/End_To_End_Data.csv'
 device = torch.device('cuda')
 # split_strategy = 2
 batch_size = 4
-lr = 1e-3
-epochs = 600
+lr = 3e-3
+epochs = 200
 # in_features = 26
 out_features = 1
 inter_dim = 1024
@@ -51,8 +51,8 @@ model_1 = End_To_End_Predicter(in_features=train_1_dataset.req_cols, out_feature
 criterion = nn.MSELoss().to(device)
 optimizer = torch.optim.Adam(model_0.parameters(), lr=lr)
 
-train_losses = []
-avg_train_losses = []
+train_0_losses = []
+train_1_losses = []
 
 for epoch in tqdm(range(epochs)):
     model_0.train()
@@ -62,18 +62,40 @@ for epoch in tqdm(range(epochs)):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        train_losses.append(loss.item())
+        train_0_losses.append(loss.item())
 
-    train_loss = np.average(train_losses)
+    train_loss_0 = np.average(train_0_losses)
     
     print()
     print(f'[{epoch:>{len(str(epoch))}}/{epochs:>{len(str(epoch))}}] ' +
-                     f'train_loss: {train_loss:.8f}')
+                     f'train_0_loss: {train_loss_0:.8f}')
+
+    model_1.train()
+    for x_train, y_train, store_ids in train_1_loader:
+        outputs = model_1(x_train, store_ids)
+        loss = criterion(outputs, y_train)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        train_1_losses.append(loss.item())
+
+    train_loss_1 = np.average(train_1_losses)
+
+    print(f'[{epoch:>{len(str(epoch))}}/{epochs:>{len(str(epoch))}}] ' +
+                     f'train_1_loss: {train_loss_1:.8f}')
+
 
 with torch.no_grad():
-    result = model_0(test_0_dataset.x, test_0_dataset.store_ids, test=True)        # 351, 84, 1
-    result = result.cpu().detach().numpy()
+    result_0 = model_0(test_0_dataset.x, test_0_dataset.store_ids, test=True)        # 351, 84, 1
+    result_0 = result_0.cpu().detach().numpy()
 
-result = result.reshape(351, -1)
-result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/per_item/1e3_600_ver.csv', index=None)
+    result_1 = model_1(test_1_dataset.x, test_1_dataset.store_ids, test=True)        # 1870, 84, 1
+    result_1 = result_1.cpu().detach().numpy()
+
+result_0 = result_0.reshape(len(model_keys[0]), -1)
+result_0_df = pd.DataFrame(result_0)
+result_0_df.to_csv('/workspace/DSP/result/per_item/0/3e3_200_ver.csv', index=None)
+
+result_1 = result_1.reshape(len(model_keys[1]), -1)
+result_1_df = pd.DataFrame(result_1)
+result_1_df.to_csv('/workspace/DSP/result/per_item/1/3e3_200_ver.csv', index=None)
