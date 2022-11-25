@@ -38,8 +38,8 @@ class End_To_End_Predicter(nn.Module):
             transformers.GPT2Config(n_embd=inter_dim,
                                     vocab_size=in_features,
                                     use_cache=True,
-                                    n_head=8,
-                                    n_layer=8))
+                                    n_head=4,
+                                    n_layer=4))
         del self.gpt_model.wte
         self.output_len = output_len
         self.inter_dim = inter_dim
