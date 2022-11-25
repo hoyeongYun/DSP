@@ -22,7 +22,7 @@ device = torch.device('cuda')
 # split_strategy = 2
 batch_size = 4
 lr = 1e-3
-epochs = 100
+epochs = 400
 # in_features = 26
 out_features = 1
 inter_dim = 512
@@ -76,7 +76,7 @@ with torch.no_grad():
 
 result = result.reshape(351, -1)
 result_df = pd.DataFrame(result)
-result_df.to_csv('/workspace/DSP/result/per_item/1e3_100_ver.csv', index=None)
+result_df.to_csv('/workspace/DSP/result/per_item/1e3_400_ver.csv', index=None)
 
 
 
