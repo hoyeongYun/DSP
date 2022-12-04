@@ -27,35 +27,36 @@ month_scaler = MinMaxScaler()
 industry_scaler = MinMaxScaler()
 retail_scaler = MinMaxScaler()
 train_eval_df['Month'] = month_scaler.fit_transform(train_eval_df['Month'].to_numpy().reshape(-1, 1))
-train_eval_df['Augmented_Industry_Size'] = month_scaler.fit_transform(train_eval_df['Augmented_Industry_Size'].to_numpy().reshape(-1, 1))
-train_eval_df['Augmented_Retail_Size'] = month_scaler.fit_transform(train_eval_df['Augmented_Retail_Size'].to_numpy().reshape(-1, 1))
+# train_eval_df['Augmented_Industry_Size'] = month_scaler.fit_transform(train_eval_df['Augmented_Industry_Size'].to_numpy().reshape(-1, 1))
+# train_eval_df['Augmented_Retail_Size'] = month_scaler.fit_transform(train_eval_df['Augmented_Retail_Size'].to_numpy().reshape(-1, 1))
 
 class Window_Dataset(torch.utils.data.Dataset):
-    def __init__(self, df, x_cols=5, y_cols=1, total_month=861, total_item=11556, input_window=60, output_window=21, stride=10):
+    def __init__(self, df, x_cols=5, y_cols=1, total_month=861, total_item=11556, input_window=120, output_window=21, stride=30):
         
         orig_data = df.to_numpy().reshape(total_item, total_month, x_cols)
-        num_samples_per_item = (total_month - input_window - output_window) // stride + 1
+        self.num_samples_per_item = (total_month - input_window - output_window) // stride + 1
 
-        X = np.zeros([total_item * num_samples_per_item, input_window, x_cols])
-        Y = np.zeros([total_item * num_samples_per_item, output_window, y_cols])
+        X = np.zeros([total_item * self.num_samples_per_item, input_window, x_cols])
+        Y = np.zeros([total_item * self.num_samples_per_item, output_window, y_cols])
         
         for item in range(total_item):
-            for i in range(num_samples_per_item):
+            for i in range(self.num_samples_per_item):
                 start_x = stride*i
                 end_x = start_x + input_window
-                X[(item*num_samples_per_item + i), :, :] = orig_data[item, start_x:end_x, :]
+                X[(item*self.num_samples_per_item + i), :, :] = orig_data[item, start_x:end_x, :]
 
                 start_y = stride*i + input_window
                 end_y = start_y + output_window
-                Y[(item*num_samples_per_item + i), :, :] = orig_data[item, start_y:end_y, -1:]
+                Y[(item*self.num_samples_per_item + i), :, :] = orig_data[item, start_y:end_y, -1:]
+
 
         self.test_x = torch.tensor(orig_data[:, -input_window:, :])
         self.x = X
         self.y = Y
-        self.len = total_item * num_samples_per_item
+        self.len = total_item * self.num_samples_per_item
 
-        assert self.x.shape == (total_item * num_samples_per_item, input_window, x_cols)
-        assert self.y.shape == (total_item * num_samples_per_item, output_window, y_cols)
+        assert self.x.shape == (total_item * self.num_samples_per_item, input_window, x_cols)
+        assert self.y.shape == (total_item * self.num_samples_per_item, output_window, y_cols)
 
     def __getitem__(self, i):
         return self.x[i], self.y[i]
@@ -105,11 +106,11 @@ def gen_attention_mask(x):
 
 train_dataset = Window_Dataset(train_eval_df)
 test_x = train_dataset.test_x
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=79*8)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=train_dataset.num_samples_per_item*4)
 
 device = torch.device("cuda")
 lr = 3e-3
-model = Encoder_MLP_Model(60, 21, 512, 8, 4, 0.1).to(device)
+model = Encoder_MLP_Model(120, 21, 512, 8, 8, 0.1).to(device)
 criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
@@ -127,6 +128,13 @@ for epoch in tqdm(range(epochs)):
         loss.backward()
         optimizer.step()
         train_losses.append(loss.item())
+
+    if epoch == 4:
+        with torch.no_grad():
+            result = model(test_x.float().to(device), model.generate_square_subsequent_mask(test_x.shape[1]).to(device))
+            result = result.cpu().detach().numpy()
+            result_df = pd.DataFrame(result)
+            result_df.to_csv('/workspace/DSP/result/em/encoder_mlp_epoch5.csv', index=None)
 
     if (epoch+1) % 10 == 0:
         with torch.no_grad():
