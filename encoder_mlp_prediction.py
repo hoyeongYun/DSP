@@ -69,6 +69,7 @@ class Encoder_MLP_Model(nn.Module):
         super().__init__()
         self.encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, dropout=dropout)
         self.transformer_encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=nlayers) 
+        self.pos_encoder = PositionalEncoding(d_model, dropout)
 
         self.encoder = nn.Sequential(
             nn.Linear(5, d_model//2),
@@ -94,15 +95,40 @@ class Encoder_MLP_Model(nn.Module):
         return mask
 
     def forward(self, src, srcmask):
-        src = self.encoder(src) # batch, 60, 5 -> batch, 60 , 512
+        src = self.encoder(src) # batch, window, 5 -> batch, window , 512
+        src = self.pos_encoder(src)
         output = self.transformer_encoder(src.transpose(0,1), srcmask).transpose(0,1)
         output = self.linear(output)[:,:,0]
         output = self.linear2(output)
         return output
 
-def gen_attention_mask(x):
-    mask = torch.eq(x, 0)
-    return mask
+class PositionalEncoding(nn.Module):
+    def __init__(self, d_model, dropout=0.1, max_len=5000):
+        super(PositionalEncoding, self).__init__()
+        self.dropout = nn.Dropout(p=dropout)
+
+        pe = torch.zeros(max_len, d_model)
+        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        pe = pe.unsqueeze(0)        # 1, max_len, d_model
+        self.register_buffer('pe', pe)
+
+    def forward(self, x):
+        x = x + self.pe[0, :x.size(1), :]
+        return self.dropout(x)
+
+# def gen_attention_mask(x):
+#     mask = torch.eq(x, 0)
+#     return mask
+
+def weighted_mse_loss(result, target, device):
+    w_zero = 0.05
+    max_target_val = 135.2
+    priority_to_non_zero_values = 1
+    weight = torch.FloatTensor(np.where(target.cpu().detach().numpy() < 1.0, w_zero, priority_to_non_zero_values + np.exp(target.cpu().detach().numpy() / max_target_val))).to(device)
+    return torch.sum(weight * (result - target) ** 2)
 
 train_dataset = Window_Dataset(train_eval_df)
 test_x = train_dataset.test_x
@@ -111,7 +137,7 @@ train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=train_datas
 device = torch.device("cuda")
 lr = 3e-3
 model = Encoder_MLP_Model(120, 21, 512, 8, 8, 0.1).to(device)
-criterion = nn.MSELoss()
+criterion = weighted_mse_loss
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
 train_losses = []
@@ -123,7 +149,7 @@ for epoch in tqdm(range(epochs)):
     model.train()
     for x_train, y_train in train_loader:
         result = model(x_train.float().to(device), model.generate_square_subsequent_mask(x_train.shape[1]).to(device))
-        loss = criterion(result, y_train[:,:,0].float().to(device))
+        loss = criterion(result, y_train[:,:,0].float().to(device), device)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -148,3 +174,4 @@ for epoch in tqdm(range(epochs)):
     epoch_len = len(str(epoch))
     print()
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +  f'train_loss: {train_loss:.8f}')        
+    # positional encoding 추가, test때 왜 모든 item 값이 같은지 trouble shooting
