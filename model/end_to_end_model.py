@@ -32,8 +32,17 @@ class End_To_End_Predicter(nn.Module):
         inter_dim: int,   # 1024
         output_len: int = 1):
         super().__init__()
-        self.encoder = nn.Linear(in_features, inter_dim, bias=False)     # ex) B, 84, 18D -> 1024
-        self.decoder = nn.Linear(inter_dim, 1, bias=False)     # ex) B, 84, 1024 -> 18
+
+        self.encoder = nn.Sequential(
+            nn.Linear(in_features, (in_features + inter_dim)//2),
+            nn.ReLU(),
+            nn.Linear((in_features + inter_dim)//2, inter_dim)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(inter_dim, inter_dim//2),
+            nn.ReLU(),
+            nn.Linear(inter_dim//2, out_features)
+        )
         self.gpt_model = transformers.GPT2Model(
             transformers.GPT2Config(n_embd=inter_dim,
                                     vocab_size=in_features,
@@ -44,9 +53,9 @@ class End_To_End_Predicter(nn.Module):
         self.output_len = output_len
         self.inter_dim = inter_dim
         self.in_features = in_features
-        self.store_id_encoder = StoreID_Encoding(inter_dim)
+        # self.store_id_encoder = StoreID_Encoding(inter_dim)
 
-    def forward(self, feats, store_ids, output_len=1, test=False):
+    def forward(self, feats, store_ids=0, output_len=1, test=False):
         """
         Args:
             feats: input tensor                 EX) [B, 84, 18D]
@@ -55,8 +64,8 @@ class End_To_End_Predicter(nn.Module):
             refactoring 필요
         """
         inp_feats = feats
-        feats = self.encoder(feats)         # [B, 84, 18D] -> [B, 84, 1024]
-        feats = self.store_id_encoder(feats, store_ids)
+        feats = self.encoder(feats)         # [B, 84, 5] -> [B, 84, 1024]
+        # feats = self.store_id_encoder(feats, store_ids)
         past = None
         all_outputs = []
         all_outputs_decoded = []
@@ -67,7 +76,7 @@ class End_To_End_Predicter(nn.Module):
                                         dtype=torch.long,
                                         device=feats.device)
             if test:
-                position_ids = position_ids + (torch.ones_like(position_ids, dtype=torch.long, device=feats.device)*3)
+                position_ids = position_ids + (torch.ones_like(position_ids, dtype=torch.long, device=feats.device)*21)
             outputs = self.gpt_model(inputs_embeds=feats,               
                                      past_key_values=past,           
                                      position_ids=position_ids)
