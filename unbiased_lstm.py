@@ -10,8 +10,16 @@ import torch.nn as nn
 from torch.nn import Transformer
 from torch.utils.data import DataLoader, TensorDataset
 
-torch.manual_seed(0)
 np.set_printoptions(linewidth=np.inf)
+random_seed = 21
+torch.manual_seed(random_seed)
+torch.cuda.manual_seed(random_seed)
+# torch.cuda.manual_seed_all(random_seed) # if use multi-GPU
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+np.random.seed(random_seed)
+random.seed(random_seed)
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 data_df = pd.read_csv('/workspace/DSP/data/PREPROCESSED/Unbiased_Data.csv')
@@ -51,22 +59,8 @@ FEAT_KEY = ['Industry_Size', 'Retail_Size',
             'Location_Cluster_0', 'Location_Cluster_1', 'Location_Cluster_2', 'Location_Cluster_3',
             'Item_Type_Electronics', 'Item_Type_Grocery', 'Item_Type_Home Goods', 
               'Urban_Rural_Rural', 'Urban_Rural_Urban']
+
 window_size = 15
-
-# x = np.empty((0, window_size, len(FEAT_KEY)), dtype=np.float32)
-# y = np.empty((0, len(TARGET_KEY)), dtype=np.float32)
-
-# for store_id in tqdm(range(1, 643)):
-#   cur_store_df = data_df[data_df.Store == store_id]
-#   nonzero_index = cur_store_df[(cur_store_df.Month >= (window_size - 1)) & (cur_store_df.Target_3_Month_Retail_Sum != 0)].index
-#   for i in nonzero_index:
-#     x = np.append(x, data_df[FEAT_KEY].iloc[i-(window_size-1) : i+1].to_numpy().reshape(1, window_size, len(FEAT_KEY)), axis=0)
-#     y = np.append(y, data_df[TARGET_KEY].iloc[i].to_numpy().reshape(1, len(TARGET_KEY)), axis=0)
-
-# test_x = data_df[FEAT_KEY].to_numpy().reshape(11556, 87, len(FEAT_KEY))[:, -window_size:, :]
-
-# np.save('/workspace/DSP/INPUT/data_w15_input_x', x)
-# np.save('/workspace/DSP/INPUT/data_w15_input_y', y)
 
 x_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_1.npy')
 x_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_2.npy')
@@ -117,7 +111,7 @@ def weighted_mse_loss(result, target, device):
 
 # 일단 scaling 안하고
 
-train_size = int(len(x) * 0.9)
+train_size = int(len(x) * 0.8)
 train_x = x[:train_size]
 train_y = y[:train_size]
 
@@ -138,7 +132,7 @@ eval_dataset = TensorDataset(evalX_tensor, evalY_tensor)
 train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, drop_last=True)
 eval_loader = DataLoader(eval_dataset, batch_size=8, shuffle=False, drop_last=True)
 
-model = LSTM(input_dim=14, hidden_dim=128, seq_len=window_size, output_dim=1, layers=2).to(device)
+model = LSTM(input_dim=14, hidden_dim=128, seq_len=window_size, output_dim=1, layers=1).to(device)
 
 lr = 1e-3
 epochs = 200
@@ -197,8 +191,9 @@ with torch.no_grad():
     test_result = model(testX_tensor).detach().cpu().numpy()
 
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
+    print(eval_df.shape)
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/w15_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/w15_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/w15_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/w15_{epochs}_test.csv', index=None)
     
