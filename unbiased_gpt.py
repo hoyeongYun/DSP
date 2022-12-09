@@ -35,7 +35,7 @@ n_heads = 4
 n_layers = 4
 split_frac = 0.8
 lr = 1e-4
-epochs = 25
+epochs = 50
 batch_size = 48
 # patience = 7
 
@@ -79,16 +79,27 @@ FEAT_KEY = ['Industry_Size', 'Retail_Size',
 
 x_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_1.npy')
 x_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_2.npy')
-y = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
-x = np.concatenate([x_1, x_2])
+x_zero_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_1.npy')
+x_zero_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_2.npy')
+
+y_nonzero = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
+y_zero = np.load('/workspace/DSP/data/INPUT/window_15_input_y_zero_456.npy')
+
+x_nonzero = np.concatenate([x_1, x_2])
+x_zero = np.concatenate([x_zero_1, x_zero_2])
+
+train_x = np.concatenate([x_nonzero[:int(x_nonzero.shape[0]*split_frac)], x_zero[:int(x_zero.shape[0]*split_frac)]])
+train_y = np.concatenate([y_nonzero[:int(y_nonzero.shape[0]*split_frac)], y_zero[:int(y_zero.shape[0]*split_frac)]])
+eval_x = np.concatenate([x_nonzero[int(x_nonzero.shape[0]*split_frac):], x_zero[int(x_zero.shape[0]*split_frac):]])
+eval_y = np.concatenate([y_nonzero[int(y_nonzero.shape[0]*split_frac):], y_zero[int(y_zero.shape[0]*split_frac):]])
 
 # data split
-train_size = int(len(x) * split_frac)
-train_x = x[:train_size]
-train_y = y[:train_size]
+# train_size = int(len(x) * split_frac)
+# train_x = x[:train_size]
+# train_y = y[:train_size]
 
-eval_x = x[train_size:]
-eval_y = y[train_size:]
+# eval_x = x[train_size:]
+# eval_y = y[train_size:]
 
 test_x = data_df[FEAT_KEY].to_numpy().reshape(ITEM_STORES, MONTHS, len(FEAT_KEY))[:, -window_size:, :]
 
@@ -110,12 +121,12 @@ eval_index = torch.randperm(evalX_tensor.size(0)).to(device)
 evalX_tensor_sfd = torch.index_select(evalX_tensor, dim=0, index=eval_index).to(device)
 evalY_tensor_sfd = torch.index_select(evalY_tensor, dim=0, index=eval_index).to(device)
 
-np.save('/workspace/DSP/result/unbiased/gpt/eval_x_index.npy', eval_index.cpu().detach().numpy())
+# np.save('/workspace/DSP/result/unbiased/gpt/eval_x_index.npy', eval_index.cpu().detach().numpy())
 
 # dataset, dataloader
 train_dataset = TensorDataset(trainX_tensor_sfd, trainY_tensor_sfd)
 eval_dataset = TensorDataset(evalX_tensor_sfd, evalY_tensor_sfd)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False, drop_last=True)
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False, drop_last=True)
 
 # model
@@ -173,6 +184,6 @@ with torch.no_grad():
     print(eval_df.shape)
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/gpt_w15_4_4_56_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/gpt_w15_4_4_56_{epochs}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_test.csv', index=None)
     
