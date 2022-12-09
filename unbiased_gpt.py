@@ -112,20 +112,20 @@ evalY_tensor = torch.FloatTensor(eval_y).to(device)
 
 testX_tensor = torch.FloatTensor(test_x).to(device)
 
-# shuffle
-train_index = torch.randperm(trainX_tensor.size(0)).to(device)
-trainX_tensor_sfd = torch.index_select(trainX_tensor, dim=0, index=train_index).to(device)
-trainY_tensor_sfd = torch.index_select(trainY_tensor, dim=0, index=train_index).to(device)
+# # shuffle
+# train_index = torch.randperm(trainX_tensor.size(0)).to(device)
+# trainX_tensor_sfd = torch.index_select(trainX_tensor, dim=0, index=train_index).to(device)
+# trainY_tensor_sfd = torch.index_select(trainY_tensor, dim=0, index=train_index).to(device)
 
-eval_index = torch.randperm(evalX_tensor.size(0)).to(device)
-evalX_tensor_sfd = torch.index_select(evalX_tensor, dim=0, index=eval_index).to(device)
-evalY_tensor_sfd = torch.index_select(evalY_tensor, dim=0, index=eval_index).to(device)
+# eval_index = torch.randperm(evalX_tensor.size(0)).to(device)
+# evalX_tensor_sfd = torch.index_select(evalX_tensor, dim=0, index=eval_index).to(device)
+# evalY_tensor_sfd = torch.index_select(evalY_tensor, dim=0, index=eval_index).to(device)
 
-np.save('/workspace/DSP/result/unbiased/gpt/eval_x_withzero_index.npy', eval_index.cpu().detach().numpy())
+# np.save('/workspace/DSP/result/unbiased/gpt/eval_x_withzero_index.npy', eval_index.cpu().detach().numpy())
 
 # dataset, dataloader
-train_dataset = TensorDataset(trainX_tensor_sfd, trainY_tensor_sfd)
-eval_dataset = TensorDataset(evalX_tensor_sfd, evalY_tensor_sfd)
+train_dataset = TensorDataset(trainX_tensor, trainY_tensor)
+eval_dataset = TensorDataset(evalX_tensor, evalY_tensor)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False, drop_last=True)
 
