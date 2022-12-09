@@ -121,7 +121,7 @@ eval_index = torch.randperm(evalX_tensor.size(0)).to(device)
 evalX_tensor_sfd = torch.index_select(evalX_tensor, dim=0, index=eval_index).to(device)
 evalY_tensor_sfd = torch.index_select(evalY_tensor, dim=0, index=eval_index).to(device)
 
-# np.save('/workspace/DSP/result/unbiased/gpt/eval_x_index.npy', eval_index.cpu().detach().numpy())
+np.save('/workspace/DSP/result/unbiased/gpt/eval_x_withzero_index.npy', eval_index.cpu().detach().numpy())
 
 # dataset, dataloader
 train_dataset = TensorDataset(trainX_tensor_sfd, trainY_tensor_sfd)
