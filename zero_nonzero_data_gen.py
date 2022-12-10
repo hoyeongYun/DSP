@@ -38,7 +38,7 @@ data_df.Sales_At_The_Month_Total = data_df.Sales_At_The_Month_Total.astype(np.fl
 data_df.Sales_At_The_Month_Per_Item = data_df.Sales_At_The_Month_Per_Item.astype(np.float32)
 data_df.Sales_At_The_Month_Per_Item_Type = data_df.Sales_At_The_Month_Per_Item_Type.astype(np.float32)
 
-data_df['Has_Retail'] = data_df.Target_3_Month_Retail_Sum
+data_df['Has_Retail'] = data_df.Target_3_Month_Retail_Sum.apply(is_zero_data)
 
 data_df = data_df[['Item_Store_Key', 'Month', 'Store', 'Urban_Rural', 'Location_Cluster', 'Item_Type', 'Item', 'Industry_Size',
                     'Retail_Size', 'Target_3_Month_Retail_Sum', 'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type', 'Has_Retail']]
@@ -63,14 +63,14 @@ FEAT_KEY = ['Industry_Size', 'Retail_Size',
 window_size = 15
 
 x = np.empty((0, window_size, len(FEAT_KEY)), dtype=np.float16)
-y = np.empty((0, len(TARGET_KEY)), dtype=np.float16)
 
 for store_id in tqdm(range(1, 643)):
   cur_store_df = data_df[data_df.Store == store_id]
   nonzero_index = cur_store_df[(cur_store_df.Month >= (window_size - 1)) & (cur_store_df.Target_3_Month_Retail_Sum != 0)].index
   for i in nonzero_index:
     x = np.append(x, data_df[FEAT_KEY].iloc[i-(window_size-1) : i+1].to_numpy().reshape(1, window_size, len(FEAT_KEY)), axis=0)
-    y = np.append(y, data_df[TARGET_KEY].iloc[i].to_numpy().reshape(1, len(TARGET_KEY)), axis=0)
+
+y = np.ones((x.shape[0], 1))
 
 x_1 = x[:len(x) // 2]
 x_2 = x[len(x) // 2:]
@@ -82,10 +82,9 @@ np.save('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_y', y)
 
 # zero data gen
 
-four_to_six_idx = [15, 16, 17, 27, 28, 29, 39, 40, 41, 51, 52, 53, 63, 64, 65, 75, 76, 77]
+# four_to_six_idx = [15, 16, 17, 27, 28, 29, 39, 40, 41, 51, 52, 53, 63, 64, 65, 75, 76, 77]
 
 x_zero = np.empty((0, window_size, len(FEAT_KEY)), dtype=np.float16)
-y_zero = np.empty((0, len(TARGET_KEY)), dtype=np.float16)
 
 for store_id in tqdm(range(1, 643)):
   cur_store_df = data_df[data_df.Store == store_id].reset_index(drop=True)

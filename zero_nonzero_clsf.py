@@ -34,56 +34,29 @@ window_size = 15
 n_heads = 4
 n_layers = 4
 split_frac = 0.8
-lr = 1e-4
+lr = 1e-3
 epochs = 50
 batch_size = 48
 # patience = 7
 
 data_df = pd.read_csv('/workspace/DSP/data/PREPROCESSED/Unbiased_Data.csv')
-
-data_df.Month = data_df.Month.astype(np.int16)
-data_df.Store = data_df.Store.astype(np.int16)
-data_df.Store_Owner = data_df.Store_Owner.astype(np.int16)
-
-data_df.Latitude = data_df.Latitude.astype(np.float32)
-data_df.Longitude = data_df.Longitude.astype(np.float32)
-
-data_df.Industry_Size = data_df.Industry_Size.astype(np.int16)
-data_df.Retail_Size = data_df.Retail_Size.astype(np.int16)
-
-data_df.Target_3_Month_Retail_Sum = data_df.Target_3_Month_Retail_Sum.astype(np.float32)
-data_df.Item_Store_Key = data_df.Item_Store_Key.astype(np.int16)
-
-data_df.Sales_At_The_Month_Total = data_df.Sales_At_The_Month_Total.astype(np.float32)
-data_df.Sales_At_The_Month_Per_Item = data_df.Sales_At_The_Month_Per_Item.astype(np.float32)
-data_df.Sales_At_The_Month_Per_Item_Type = data_df.Sales_At_The_Month_Per_Item_Type.astype(np.float32)
-
 data_df = data_df[['Item_Store_Key', 'Month', 'Store', 'Urban_Rural', 'Location_Cluster', 'Item_Type', 'Item', 'Industry_Size', 
-                    'Retail_Size', 'Target_3_Month_Retail_Sum', 'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type']]
-item_ord = ['Power Cord', 'Phone Charger', 'Ear Buds','Mouse', 'Keyboard', 'Milk','Eggs', 'Cereal', 
-            'Shrimp','Noodles', 'Steak', 'King Crab','Tape', 'Glue', 'Nails','Bracket', 'Brush', 'Paint']
-type_ord = ['Electronics', 'Grocery', 'Home Goods']
-item_ord_d = CategoricalDtype(categories = item_ord, ordered = True) 
-type_ord_d = CategoricalDtype(categories = type_ord, ordered = True) 
-data_df['Item'] = data_df['Item'].astype(item_ord_d)
-data_df['Item_Type'] = data_df['Item_Type'].astype(type_ord_d)
-
+                   'Retail_Size', 'Target_3_Month_Retail_Sum', 'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type']]
 data_df = pd.get_dummies(data_df, columns = ['Urban_Rural', 'Item_Type', 'Location_Cluster'])
-
-TARGET_KEY = ['Target_3_Month_Retail_Sum']
 FEAT_KEY = ['Industry_Size', 'Retail_Size', 
             'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type',  
             'Location_Cluster_0', 'Location_Cluster_1', 'Location_Cluster_2', 'Location_Cluster_3',
             'Item_Type_Electronics', 'Item_Type_Grocery', 'Item_Type_Home Goods', 
               'Urban_Rural_Rural', 'Urban_Rural_Urban']
 
-x_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_1.npy')
-x_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_2.npy')
-x_zero_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_1.npy')
-x_zero_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_2.npy')
+# load input tensor
+x_1 = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_x_1.npy')
+x_2 = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_x_2.npy')
+x_zero_1 = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_x_zero_456_1.npy')
+x_zero_2 = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_x_zero_456_2.npy')
 
-y_nonzero = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
-y_zero = np.load('/workspace/DSP/data/INPUT/window_15_input_y_zero_456.npy')
+y_nonzero = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_y.npy')
+y_zero = np.load('/workspace/DSP/data/INPUT/clsf/zero_clsf_w15_input_y_zero_456.npy')
 
 x_nonzero = np.concatenate([x_1, x_2])
 x_zero = np.concatenate([x_zero_1, x_zero_2])
@@ -92,15 +65,6 @@ train_x = np.concatenate([x_nonzero[:int(x_nonzero.shape[0]*split_frac)], x_zero
 train_y = np.concatenate([y_nonzero[:int(y_nonzero.shape[0]*split_frac)], y_zero[:int(y_zero.shape[0]*split_frac)]])
 eval_x = np.concatenate([x_nonzero[int(x_nonzero.shape[0]*split_frac):], x_zero[int(x_zero.shape[0]*split_frac):]])
 eval_y = np.concatenate([y_nonzero[int(y_nonzero.shape[0]*split_frac):], y_zero[int(y_zero.shape[0]*split_frac):]])
-
-# data split
-# train_size = int(len(x) * split_frac)
-# train_x = x[:train_size]
-# train_y = y[:train_size]
-
-# eval_x = x[train_size:]
-# eval_y = y[train_size:]
-
 test_x = data_df[FEAT_KEY].to_numpy().reshape(ITEM_STORES, MONTHS, len(FEAT_KEY))[:, -window_size:, :]
 
 # numpy to tensor
@@ -111,17 +75,6 @@ evalX_tensor = torch.FloatTensor(eval_x).to(device)
 evalY_tensor = torch.FloatTensor(eval_y).to(device)
 
 testX_tensor = torch.FloatTensor(test_x).to(device)
-
-# # shuffle
-# train_index = torch.randperm(trainX_tensor.size(0)).to(device)
-# trainX_tensor_sfd = torch.index_select(trainX_tensor, dim=0, index=train_index).to(device)
-# trainY_tensor_sfd = torch.index_select(trainY_tensor, dim=0, index=train_index).to(device)
-
-# eval_index = torch.randperm(evalX_tensor.size(0)).to(device)
-# evalX_tensor_sfd = torch.index_select(evalX_tensor, dim=0, index=eval_index).to(device)
-# evalY_tensor_sfd = torch.index_select(evalY_tensor, dim=0, index=eval_index).to(device)
-
-# np.save('/workspace/DSP/result/unbiased/gpt/eval_x_withzero_index.npy', eval_index.cpu().detach().numpy())
 
 # dataset, dataloader
 train_dataset = TensorDataset(trainX_tensor, trainY_tensor)
@@ -138,7 +91,7 @@ model = GPT_MLP_MODEL(in_features=in_features,
                     n_layers=n_layers).to(device)
 
 # criterion = nn.MSELoss().to(device)
-criterion = weighted_mse_loss
+criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 train_hist = np.zeros(epochs)
 train_losses = []
@@ -148,25 +101,38 @@ count = 0
 # train, eval
 for epoch in tqdm(range(epochs)):
 
+    correct = 0
     model.train()
     for batch_idx, samples in enumerate(train_loader):
         x_train, y_train = samples
         outputs = model(x_train)
-        loss = criterion(outputs, y_train, device)
+        loss = criterion(outputs, y_train)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         train_losses.append(loss.item())
-        
+        pred = (torch.sigmoid(outputs) > 0.5).float()
+        correct += (pred == y_train).sum()
+
+    train_acc = correct / len(train_dataset)
+    print(f'train_acc : {train_acc}')
+
+    correct = 0
     model.eval()
     for x_eval, y_eval in eval_loader:
         outputs = model(x_eval)
-        loss = criterion(outputs, y_eval, device)
+        loss = criterion(outputs, y_eval)
         eval_losses.append(loss.item())
-    
+        pred = (torch.sigmoid(outputs) > 0.5).float()
+        correct += (pred == y_eval).sum()
+
+    val_acc = correct /len(eval_dataset)
+    print(f'val_acc : {val_acc}')
+        
     train_loss = np.average(train_losses)
     eval_loss = np.average(eval_losses)
     train_hist[epoch] = eval_loss
+    
 
     epoch_len = len(str(epoch))
     print('\n')
@@ -184,6 +150,6 @@ with torch.no_grad():
     print(eval_df.shape)
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/zero_clsf_1e3_w15_4_4_56_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/zero_clsf_1e3_w15_4_4_56_{epochs}_test.csv', index=None)
     
