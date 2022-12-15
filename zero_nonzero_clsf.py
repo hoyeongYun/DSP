@@ -34,8 +34,8 @@ window_size = 15
 n_heads = 4
 n_layers = 4
 split_frac = 0.8
-lr = 1e-3
-epochs = 50
+lr = 3e-3
+epochs = 150
 batch_size = 48
 # patience = 7
 

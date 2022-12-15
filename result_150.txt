@@ -1,0 +1,751 @@
+train_acc : 0.7788010835647583
+val_acc : 0.7924429774284363
+
+
+[0/150] train_loss: 0.47848 valid_loss: 0.45474
+train_acc : 0.787523627281189
+val_acc : 0.7984603643417358
+
+
+[1/150] train_loss: 0.46751 valid_loss: 0.44475
+train_acc : 0.7942968010902405
+val_acc : 0.8006073832511902
+
+
+[2/150] train_loss: 0.45938 valid_loss: 0.44187
+train_acc : 0.7961472272872925
+val_acc : 0.8048308491706848
+
+
+[3/150] train_loss: 0.45416 valid_loss: 0.43687
+train_acc : 0.7971289753913879
+val_acc : 0.803333580493927
+
+
+[4/150] train_loss: 0.45055 valid_loss: 0.43518
+train_acc : 0.7969700694084167
+val_acc : 0.8016102910041809
+
+
+[5/150] train_loss: 0.44784 valid_loss: 0.43396
+train_acc : 0.7981460094451904
+val_acc : 0.8047884702682495
+
+
+[6/150] train_loss: 0.44561 valid_loss: 0.43204
+train_acc : 0.798587441444397
+val_acc : 0.8022459149360657
+
+
+[7/150] train_loss: 0.44382 valid_loss: 0.43141
+train_acc : 0.7987251281738281
+val_acc : 0.8015820384025574
+
+
+[8/150] train_loss: 0.44232 valid_loss: 0.43146
+train_acc : 0.7991030216217041
+val_acc : 0.804576575756073
+
+
+[9/150] train_loss: 0.44100 valid_loss: 0.43060
+train_acc : 0.7991736531257629
+val_acc : 0.8055794835090637
+
+
+[10/150] train_loss: 0.43988 valid_loss: 0.42987
+train_acc : 0.7993819713592529
+val_acc : 0.8036725521087646
+
+
+[11/150] train_loss: 0.43888 valid_loss: 0.42905
+train_acc : 0.8003354668617249
+val_acc : 0.8057772517204285
+
+
+[12/150] train_loss: 0.43798 valid_loss: 0.42827
+train_acc : 0.7993113398551941
+val_acc : 0.8054947257041931
+
+
+[13/150] train_loss: 0.43721 valid_loss: 0.42755
+train_acc : 0.7996256351470947
+val_acc : 0.8033618330955505
+
+
+[14/150] train_loss: 0.43652 valid_loss: 0.42682
+train_acc : 0.7998799085617065
+val_acc : 0.8057772517204285
+
+
+[15/150] train_loss: 0.43591 valid_loss: 0.42622
+train_acc : 0.7991524338722229
+val_acc : 0.8048873543739319
+
+
+[16/150] train_loss: 0.43539 valid_loss: 0.42574
+train_acc : 0.8000635504722595
+val_acc : 0.8044353127479553
+
+
+[17/150] train_loss: 0.43485 valid_loss: 0.42517
+train_acc : 0.8005261421203613
+val_acc : 0.7969489097595215
+
+
+[18/150] train_loss: 0.43438 valid_loss: 0.42531
+train_acc : 0.8003990054130554
+val_acc : 0.8002400994300842
+
+
+[19/150] train_loss: 0.43396 valid_loss: 0.42517
+train_acc : 0.7991736531257629
+val_acc : 0.798206090927124
+
+
+[20/150] train_loss: 0.43367 valid_loss: 0.42525
+train_acc : 0.8001094460487366
+val_acc : 0.805565357208252
+
+
+[21/150] train_loss: 0.43328 valid_loss: 0.42513
+train_acc : 0.8002154231071472
+val_acc : 0.8059608936309814
+
+
+[22/150] train_loss: 0.43294 valid_loss: 0.42469
+train_acc : 0.7996857166290283
+val_acc : 0.8038561940193176
+
+
+[23/150] train_loss: 0.43271 valid_loss: 0.42446
+train_acc : 0.7993078231811523
+val_acc : 0.8006497621536255
+
+
+[24/150] train_loss: 0.43253 valid_loss: 0.42447
+train_acc : 0.7989687919616699
+val_acc : 0.803333580493927
+
+
+[25/150] train_loss: 0.43241 valid_loss: 0.42460
+train_acc : 0.7971678376197815
+val_acc : 0.8045341968536377
+
+
+[26/150] train_loss: 0.43245 valid_loss: 0.42449
+train_acc : 0.7984638214111328
+val_acc : 0.8025143146514893
+
+
+[27/150] train_loss: 0.43239 valid_loss: 0.42455
+train_acc : 0.7969771027565002
+val_acc : 0.7987428307533264
+
+
+[28/150] train_loss: 0.43238 valid_loss: 0.42475
+train_acc : 0.7966063022613525
+val_acc : 0.8015114068984985
+
+
+[29/150] train_loss: 0.43243 valid_loss: 0.42470
+train_acc : 0.7959989309310913
+val_acc : 0.8025425672531128
+
+
+[30/150] train_loss: 0.43250 valid_loss: 0.42467
+train_acc : 0.793876588344574
+val_acc : 0.7945899963378906
+
+
+[31/150] train_loss: 0.43267 valid_loss: 0.42505
+train_acc : 0.7935057878494263
+val_acc : 0.7963132858276367
+
+
+[32/150] train_loss: 0.43295 valid_loss: 0.42537
+train_acc : 0.7943426966667175
+val_acc : 0.7981637120246887
+
+
+[33/150] train_loss: 0.43308 valid_loss: 0.42570
+train_acc : 0.7942120432853699
+val_acc : 0.8036160469055176
+
+
+[34/150] train_loss: 0.43325 valid_loss: 0.42575
+train_acc : 0.7941873073577881
+val_acc : 0.8011582493782043
+
+
+[35/150] train_loss: 0.43340 valid_loss: 0.42575
+train_acc : 0.7937882542610168
+val_acc : 0.7929514646530151
+
+
+[36/150] train_loss: 0.43355 valid_loss: 0.42600
+train_acc : 0.7907336354255676
+val_acc : 0.7978953123092651
+
+
+[37/150] train_loss: 0.43392 valid_loss: 0.42609
+train_acc : 0.7931879162788391
+val_acc : 0.7980930805206299
+
+
+[38/150] train_loss: 0.43412 valid_loss: 0.42623
+train_acc : 0.7934386730194092
+val_acc : 0.7999011278152466
+
+
+[39/150] train_loss: 0.43429 valid_loss: 0.42640
+train_acc : 0.7884276509284973
+val_acc : 0.7905219197273254
+
+
+[40/150] train_loss: 0.43473 valid_loss: 0.42689
+train_acc : 0.791418731212616
+val_acc : 0.7996609807014465
+
+
+[41/150] train_loss: 0.43497 valid_loss: 0.42705
+train_acc : 0.7910196781158447
+val_acc : 0.7980083227157593
+
+
+[42/150] train_loss: 0.43525 valid_loss: 0.42721
+train_acc : 0.7920932173728943
+val_acc : 0.7881206274032593
+
+
+[43/150] train_loss: 0.43547 valid_loss: 0.42777
+train_acc : 0.791224479675293
+val_acc : 0.7946041226387024
+
+
+[44/150] train_loss: 0.43572 valid_loss: 0.42796
+train_acc : 0.7928524613380432
+val_acc : 0.7930362224578857
+
+
+[45/150] train_loss: 0.43588 valid_loss: 0.42837
+train_acc : 0.7915140390396118
+val_acc : 0.7934176325798035
+
+
+[46/150] train_loss: 0.43606 valid_loss: 0.42871
+train_acc : 0.7929548621177673
+val_acc : 0.7989688515663147
+
+
+[47/150] train_loss: 0.43619 valid_loss: 0.42877
+train_acc : 0.7906877398490906
+val_acc : 0.7939826250076294
+
+
+[48/150] train_loss: 0.43641 valid_loss: 0.42896
+train_acc : 0.7916800379753113
+val_acc : 0.7978388071060181
+
+
+[49/150] train_loss: 0.43658 valid_loss: 0.42918
+train_acc : 0.7897377610206604
+val_acc : 0.7829790115356445
+
+
+[50/150] train_loss: 0.43678 valid_loss: 0.42991
+train_acc : 0.7898719906806946
+val_acc : 0.7928525805473328
+
+
+[51/150] train_loss: 0.43699 valid_loss: 0.43028
+train_acc : 0.7904475927352905
+val_acc : 0.7917367219924927
+
+
+[52/150] train_loss: 0.43717 valid_loss: 0.43045
+train_acc : 0.7909172773361206
+val_acc : 0.7994067072868347
+
+
+[53/150] train_loss: 0.43731 valid_loss: 0.43057
+train_acc : 0.7888408303260803
+val_acc : 0.7808884978294373
+
+
+[54/150] train_loss: 0.43751 valid_loss: 0.43106
+train_acc : 0.7911856770515442
+val_acc : 0.785239040851593
+
+
+[55/150] train_loss: 0.43768 valid_loss: 0.43164
+train_acc : 0.7922980189323425
+val_acc : 0.7905219197273254
+
+
+[56/150] train_loss: 0.43782 valid_loss: 0.43190
+train_acc : 0.7886112928390503
+val_acc : 0.7846881747245789
+
+
+[57/150] train_loss: 0.43809 valid_loss: 0.43234
+train_acc : 0.789787232875824
+val_acc : 0.7959036827087402
+
+
+[58/150] train_loss: 0.43828 valid_loss: 0.43259
+train_acc : 0.7903663516044617
+val_acc : 0.7662405371665955
+
+
+[59/150] train_loss: 0.43845 valid_loss: 0.43361
+train_acc : 0.787145733833313
+val_acc : 0.7900558114051819
+
+
+[60/150] train_loss: 0.43870 valid_loss: 0.43400
+train_acc : 0.7886465787887573
+val_acc : 0.7921321988105774
+
+
+[61/150] train_loss: 0.43891 valid_loss: 0.43430
+train_acc : 0.789603590965271
+val_acc : 0.7929373383522034
+
+
+[62/150] train_loss: 0.43911 valid_loss: 0.43459
+train_acc : 0.7894623279571533
+val_acc : 0.7871035933494568
+
+
+[63/150] train_loss: 0.43928 valid_loss: 0.43487
+train_acc : 0.7883428931236267
+val_acc : 0.7916237115859985
+
+
+[64/150] train_loss: 0.43944 valid_loss: 0.43517
+train_acc : 0.7898366451263428
+val_acc : 0.7922734618186951
+
+
+[65/150] train_loss: 0.43960 valid_loss: 0.43528
+train_acc : 0.786375880241394
+val_acc : 0.7885161638259888
+
+
+[66/150] train_loss: 0.43985 valid_loss: 0.43555
+train_acc : 0.7860615849494934
+val_acc : 0.7956211566925049
+
+
+[67/150] train_loss: 0.44006 valid_loss: 0.43566
+train_acc : 0.7870715856552124
+val_acc : 0.7923582196235657
+
+
+[68/150] train_loss: 0.44036 valid_loss: 0.43598
+train_acc : 0.7865560054779053
+val_acc : 0.794872522354126
+
+
+[69/150] train_loss: 0.44062 valid_loss: 0.43616
+train_acc : 0.7855637073516846
+val_acc : 0.7923582196235657
+
+
+[70/150] train_loss: 0.44093 valid_loss: 0.43643
+train_acc : 0.7827315330505371
+val_acc : 0.7932481169700623
+
+
+[71/150] train_loss: 0.44122 valid_loss: 0.43654
+train_acc : 0.7852635383605957
+val_acc : 0.7912423014640808
+
+
+[72/150] train_loss: 0.44144 valid_loss: 0.43675
+train_acc : 0.7855707406997681
+val_acc : 0.7924853563308716
+
+
+[73/150] train_loss: 0.44164 valid_loss: 0.43691
+train_acc : 0.787788450717926
+val_acc : 0.7973868250846863
+
+
+[74/150] train_loss: 0.44181 valid_loss: 0.43696
+train_acc : 0.7876224517822266
+val_acc : 0.7896320223808289
+
+
+[75/150] train_loss: 0.44197 valid_loss: 0.43713
+train_acc : 0.785708487033844
+val_acc : 0.7885302305221558
+
+
+[76/150] train_loss: 0.44217 valid_loss: 0.43728
+train_acc : 0.7840592861175537
+val_acc : 0.780097484588623
+
+
+[77/150] train_loss: 0.44240 valid_loss: 0.43767
+train_acc : 0.7817215323448181
+val_acc : 0.7933470010757446
+
+
+[78/150] train_loss: 0.44272 valid_loss: 0.43785
+train_acc : 0.7858744263648987
+val_acc : 0.7884031534194946
+
+
+[79/150] train_loss: 0.44293 valid_loss: 0.43807
+train_acc : 0.7860792875289917
+val_acc : 0.793022096157074
+
+
+[80/150] train_loss: 0.44312 valid_loss: 0.43819
+train_acc : 0.7847762107849121
+val_acc : 0.7865951061248779
+
+
+[81/150] train_loss: 0.44331 valid_loss: 0.43845
+train_acc : 0.7859839200973511
+val_acc : 0.7908044457435608
+
+
+[82/150] train_loss: 0.44348 valid_loss: 0.43869
+train_acc : 0.7872940897941589
+val_acc : 0.7877674698829651
+
+
+[83/150] train_loss: 0.44365 valid_loss: 0.43891
+train_acc : 0.7872057557106018
+val_acc : 0.784801185131073
+
+
+[84/150] train_loss: 0.44382 valid_loss: 0.43927
+train_acc : 0.7866584062576294
+val_acc : 0.7917225956916809
+
+
+[85/150] train_loss: 0.44398 valid_loss: 0.43938
+train_acc : 0.7857226133346558
+val_acc : 0.7916237115859985
+
+
+[86/150] train_loss: 0.44415 valid_loss: 0.43957
+train_acc : 0.782032310962677
+val_acc : 0.7926689982414246
+
+
+[87/150] train_loss: 0.44437 valid_loss: 0.43971
+train_acc : 0.7833424210548401
+val_acc : 0.7846740484237671
+
+
+[88/150] train_loss: 0.44459 valid_loss: 0.44007
+train_acc : 0.7818910479545593
+val_acc : 0.7914683222770691
+
+
+[89/150] train_loss: 0.44485 valid_loss: 0.44018
+train_acc : 0.7850162982940674
+val_acc : 0.7903100252151489
+
+
+[90/150] train_loss: 0.44502 valid_loss: 0.44027
+train_acc : 0.7849562764167786
+val_acc : 0.7924853563308716
+
+
+[91/150] train_loss: 0.44519 valid_loss: 0.44034
+train_acc : 0.78652423620224
+val_acc : 0.7886573672294617
+
+
+[92/150] train_loss: 0.44533 valid_loss: 0.44062
+train_acc : 0.7822265028953552
+val_acc : 0.7913976907730103
+
+
+[93/150] train_loss: 0.44558 valid_loss: 0.44072
+train_acc : 0.7833918929100037
+val_acc : 0.7843915224075317
+
+
+[94/150] train_loss: 0.44578 valid_loss: 0.44100
+train_acc : 0.7780241966247559
+val_acc : 0.7857334613800049
+
+
+[95/150] train_loss: 0.44606 valid_loss: 0.44119
+train_acc : 0.7792848944664001
+val_acc : 0.7814252376556396
+
+
+[96/150] train_loss: 0.44630 valid_loss: 0.44141
+train_acc : 0.7834201455116272
+val_acc : 0.7880641222000122
+
+
+[97/150] train_loss: 0.44647 valid_loss: 0.44150
+train_acc : 0.7835437059402466
+val_acc : 0.7903382778167725
+
+
+[98/150] train_loss: 0.44663 valid_loss: 0.44166
+train_acc : 0.7855919599533081
+val_acc : 0.7867363691329956
+
+
+[99/150] train_loss: 0.44678 valid_loss: 0.44184
+train_acc : 0.7839251160621643
+val_acc : 0.7779645323753357
+
+
+[100/150] train_loss: 0.44693 valid_loss: 0.44208
+train_acc : 0.7844865918159485
+val_acc : 0.7860724329948425
+
+
+[101/150] train_loss: 0.44709 valid_loss: 0.44232
+train_acc : 0.7820746898651123
+val_acc : 0.7451797127723694
+
+
+[102/150] train_loss: 0.44725 valid_loss: 0.44322
+train_acc : 0.7829574942588806
+val_acc : 0.7826541662216187
+
+
+[103/150] train_loss: 0.44740 valid_loss: 0.44366
+train_acc : 0.785330593585968
+val_acc : 0.7779927849769592
+
+
+[104/150] train_loss: 0.44752 valid_loss: 0.44393
+train_acc : 0.7849916219711304
+val_acc : 0.7795748114585876
+
+
+[105/150] train_loss: 0.44767 valid_loss: 0.44474
+train_acc : 0.7837979793548584
+val_acc : 0.7852249145507812
+
+
+[106/150] train_loss: 0.44784 valid_loss: 0.44516
+train_acc : 0.7834766507148743
+val_acc : 0.7825835347175598
+
+
+[107/150] train_loss: 0.44800 valid_loss: 0.44540
+train_acc : 0.7846384644508362
+val_acc : 0.7896037697792053
+
+
+[108/150] train_loss: 0.44813 valid_loss: 0.44557
+train_acc : 0.784917414188385
+val_acc : 0.7843915224075317
+
+
+[109/150] train_loss: 0.44826 valid_loss: 0.44578
+train_acc : 0.7866442799568176
+val_acc : 0.787640392780304
+
+
+[110/150] train_loss: 0.44836 valid_loss: 0.44588
+train_acc : 0.7870115637779236
+val_acc : 0.7955646514892578
+
+
+[111/150] train_loss: 0.44844 valid_loss: 0.44585
+train_acc : 0.7873611450195312
+val_acc : 0.7904371619224548
+
+
+[112/150] train_loss: 0.44850 valid_loss: 0.44593
+train_acc : 0.7879862189292908
+val_acc : 0.7725969552993774
+
+
+[113/150] train_loss: 0.44856 valid_loss: 0.44613
+train_acc : 0.7865736484527588
+val_acc : 0.7766226530075073
+
+
+[114/150] train_loss: 0.44862 valid_loss: 0.44630
+train_acc : 0.78675377368927
+val_acc : 0.7783600687980652
+
+
+[115/150] train_loss: 0.44867 valid_loss: 0.44656
+train_acc : 0.7877072095870972
+val_acc : 0.7823151350021362
+
+
+[116/150] train_loss: 0.44874 valid_loss: 0.44671
+train_acc : 0.7872304916381836
+val_acc : 0.7906349301338196
+
+
+[117/150] train_loss: 0.44881 valid_loss: 0.44674
+train_acc : 0.7859309315681458
+val_acc : 0.7953810095787048
+
+
+[118/150] train_loss: 0.44891 valid_loss: 0.44675
+train_acc : 0.7868244051933289
+val_acc : 0.7909457087516785
+
+
+[119/150] train_loss: 0.44898 valid_loss: 0.44681
+train_acc : 0.7867466807365417
+val_acc : 0.7881912589073181
+
+
+[120/150] train_loss: 0.44903 valid_loss: 0.44690
+train_acc : 0.7849916219711304
+val_acc : 0.7867787480354309
+
+
+[121/150] train_loss: 0.44909 valid_loss: 0.44713
+train_acc : 0.7903522253036499
+val_acc : 0.7916237115859985
+
+
+[122/150] train_loss: 0.44910 valid_loss: 0.44721
+train_acc : 0.7889008522033691
+val_acc : 0.7935870885848999
+
+
+[123/150] train_loss: 0.44916 valid_loss: 0.44728
+train_acc : 0.7903593182563782
+val_acc : 0.7932339906692505
+
+
+[124/150] train_loss: 0.44920 valid_loss: 0.44729
+train_acc : 0.7892963290214539
+val_acc : 0.789745032787323
+
+
+[125/150] train_loss: 0.44923 valid_loss: 0.44734
+train_acc : 0.789211630821228
+val_acc : 0.785041332244873
+
+
+[126/150] train_loss: 0.44924 valid_loss: 0.44745
+train_acc : 0.789006769657135
+val_acc : 0.7908892035484314
+
+
+[127/150] train_loss: 0.44927 valid_loss: 0.44751
+train_acc : 0.7903063297271729
+val_acc : 0.78956139087677
+
+
+[128/150] train_loss: 0.44931 valid_loss: 0.44766
+train_acc : 0.7911821007728577
+val_acc : 0.7934600114822388
+
+
+[129/150] train_loss: 0.44932 valid_loss: 0.44766
+train_acc : 0.7899037599563599
+val_acc : 0.7894342541694641
+
+
+[130/150] train_loss: 0.44934 valid_loss: 0.44773
+train_acc : 0.7909172773361206
+val_acc : 0.7863832116127014
+
+
+[131/150] train_loss: 0.44933 valid_loss: 0.44788
+train_acc : 0.7905499935150146
+val_acc : 0.7920050621032715
+
+
+[132/150] train_loss: 0.44934 valid_loss: 0.44793
+train_acc : 0.7894729375839233
+val_acc : 0.7919485569000244
+
+
+[133/150] train_loss: 0.44936 valid_loss: 0.44797
+train_acc : 0.7880815863609314
+val_acc : 0.7825552821159363
+
+
+[134/150] train_loss: 0.44938 valid_loss: 0.44819
+train_acc : 0.7864394783973694
+val_acc : 0.7829790115356445
+
+
+[135/150] train_loss: 0.44942 valid_loss: 0.44853
+train_acc : 0.7867572903633118
+val_acc : 0.7859453558921814
+
+
+[136/150] train_loss: 0.44947 valid_loss: 0.44873
+train_acc : 0.7848150134086609
+val_acc : 0.7797019481658936
+
+
+[137/150] train_loss: 0.44953 valid_loss: 0.44894
+train_acc : 0.7830387353897095
+val_acc : 0.7775408029556274
+
+
+[138/150] train_loss: 0.44962 valid_loss: 0.44918
+train_acc : 0.78288334608078
+val_acc : 0.7826400399208069
+
+
+[139/150] train_loss: 0.44968 valid_loss: 0.44937
+train_acc : 0.7833141684532166
+val_acc : 0.7790239453315735
+
+
+[140/150] train_loss: 0.44975 valid_loss: 0.44957
+train_acc : 0.7821664810180664
+val_acc : 0.7874850034713745
+
+
+[141/150] train_loss: 0.44986 valid_loss: 0.44975
+train_acc : 0.7848221063613892
+val_acc : 0.7843915224075317
+
+
+[142/150] train_loss: 0.44996 valid_loss: 0.45007
+train_acc : 0.7844619154930115
+val_acc : 0.7871459722518921
+
+
+[143/150] train_loss: 0.45005 valid_loss: 0.45018
+train_acc : 0.7842465043067932
+val_acc : 0.7843632698059082
+
+
+[144/150] train_loss: 0.45013 valid_loss: 0.45046
+train_acc : 0.7865842580795288
+val_acc : 0.7870753407478333
+
+
+[145/150] train_loss: 0.45017 valid_loss: 0.45057
+train_acc : 0.7877495884895325
+val_acc : 0.7914400696754456
+
+
+[146/150] train_loss: 0.45020 valid_loss: 0.45069
+train_acc : 0.7878802418708801
+val_acc : 0.791355311870575
+
+
+[147/150] train_loss: 0.45023 valid_loss: 0.45074
+train_acc : 0.7879897356033325
+val_acc : 0.7887138724327087
+
+
+[148/150] train_loss: 0.45027 valid_loss: 0.45083
+train_acc : 0.7882934212684631
+val_acc : 0.790733814239502
+
+
+[149/150] train_loss: 0.45030 valid_loss: 0.45092
+(70795, 1)

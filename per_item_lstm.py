@@ -1,5 +1,4 @@
-import pandas as pd
-from pandas.api.types import CategoricalDtype
+
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
@@ -9,35 +8,18 @@ import torch
 import torch.nn as nn
 from torch.nn import Transformer
 from torch.utils.data import DataLoader, TensorDataset
-from loss.custom_loss import weighted_mse_loss
-from model.gpt2_mlp import GPT_MLP_MODEL
 
-# fix seed
 np.set_printoptions(linewidth=np.inf)
 random_seed = 21
 torch.manual_seed(random_seed)
 torch.cuda.manual_seed(random_seed)
+# torch.cuda.manual_seed_all(random_seed) # if use multi-GPU
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 np.random.seed(random_seed)
 # random.seed(random_seed)
 
-# args
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MONTHS = 87
-STORES = 642
-ITEM_STORES = 11556
-in_features = 14
-out_features = 1
-inter_dim = 56
-window_size = 15
-n_heads = 4
-n_layers = 4
-split_frac = 0.8
-lr = 1e-4
-epochs = 50
-batch_size = 48
-# patience = 7
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 data_df = pd.read_csv('/workspace/DSP/data/PREPROCESSED/Unbiased_Data.csv')
 
@@ -77,33 +59,64 @@ FEAT_KEY = ['Industry_Size', 'Retail_Size',
             'Item_Type_Electronics', 'Item_Type_Grocery', 'Item_Type_Home Goods', 
               'Urban_Rural_Rural', 'Urban_Rural_Urban']
 
+window_size = 15
+
 x_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_1.npy')
 x_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_2.npy')
-x_zero_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_1.npy')
-x_zero_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_zero_456_2.npy')
+y = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
+x = np.concatenate([x_1, x_2])
+test_x = data_df[FEAT_KEY].to_numpy().reshape(11556, 87, len(FEAT_KEY))[:, -window_size:, :]
 
-y_nonzero = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
-y_zero = np.load('/workspace/DSP/data/INPUT/window_15_input_y_zero_456.npy')
+class LSTM(nn.Module):
+    def __init__(self, input_dim, hidden_dim, seq_len, output_dim, layers):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.seq_len = seq_len
+        self.output_dim = output_dim
+        self.layers = layers
+        self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers=layers, batch_first=True)
+        self.fc = nn.Sequential(nn.Linear(hidden_dim, (hidden_dim)//2),
+                                nn.ReLU(),
+                                nn.Linear((hidden_dim)//2, output_dim))
+        # self.mlp1 = nn.Sequential(
+        #     nn.Linear(hidden_dim, (hidden_dim)//2),
+        #     nn.ReLU(),
+        #     nn.Linear((hidden_dim)//2, output_dim)
+        # )
 
-x_nonzero = np.concatenate([x_1, x_2])
-x_zero = np.concatenate([x_zero_1, x_zero_2])
+        # self.mlp2 = nn.Sequential(
+        #     nn.Linear(seq_len, (seq_len)//2),
+        #     nn.ReLU(),
+        #     nn.Linear((seq_len)//2, output_dim)
+        # )
 
-train_x = np.concatenate([x_nonzero[:int(x_nonzero.shape[0]*split_frac)], x_zero[:int(x_zero.shape[0]*split_frac)]])
-train_y = np.concatenate([y_nonzero[:int(y_nonzero.shape[0]*split_frac)], y_zero[:int(y_zero.shape[0]*split_frac)]])
-eval_x = np.concatenate([x_nonzero[int(x_nonzero.shape[0]*split_frac):], x_zero[int(x_zero.shape[0]*split_frac):]])
-eval_y = np.concatenate([y_nonzero[int(y_nonzero.shape[0]*split_frac):], y_zero[int(y_zero.shape[0]*split_frac):]])
+    def reset_hidden_state(self):
+        self.hidden = (
+            torch.zeros(self.layers, self.seq_len, self.hidden_dim),
+            torch.zeros(self.layers, self.seq_len, self.hidden_dim)
+        )
+    def forward(self, x):
+        x, _status = self.lstm(x)
+        x = self.fc(x[:, -1])
+        # x = self.mlp1(x)
+        # x = self.mlp2(x[:, :, 0])
+        return x
 
-# data split
-# train_size = int(len(x) * split_frac)
-# train_x = x[:train_size]
-# train_y = y[:train_size]
+def weighted_mse_loss(result, target, device):
+    w_zero = 0.05
+    max_target_val = 145.0
+    weight = torch.FloatTensor(np.where(target.cpu().detach().numpy() < 1.0, w_zero, np.exp(target.cpu().detach().numpy() / max_target_val))).to(device)
+    return torch.sum(weight * (result - target) ** 2)
 
-# eval_x = x[train_size:]
-# eval_y = y[train_size:]
+# 일단 scaling 안하고
 
-test_x = data_df[FEAT_KEY].to_numpy().reshape(ITEM_STORES, MONTHS, len(FEAT_KEY))[:, -window_size:, :]
+train_size = int(len(x) * 0.8)
+train_x = x[:train_size]
+train_y = y[:train_size]
 
-# numpy to tensor
+eval_x = x[train_size:]
+eval_y = y[train_size:]
+
 trainX_tensor = torch.FloatTensor(train_x).to(device)
 trainY_tensor = torch.FloatTensor(train_y).to(device)
 
@@ -112,34 +125,32 @@ evalY_tensor = torch.FloatTensor(eval_y).to(device)
 
 testX_tensor = torch.FloatTensor(test_x).to(device)
 
-# dataset, dataloader
 train_dataset = TensorDataset(trainX_tensor, trainY_tensor)
 eval_dataset = TensorDataset(evalX_tensor, evalY_tensor)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
-eval_loader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=False, drop_last=True)
 
-# model
-model = GPT_MLP_MODEL(in_features=in_features, 
-                    out_features=out_features, 
-                    window_size=window_size, 
-                    inter_dim=inter_dim, 
-                    n_heads=n_heads, 
-                    n_layers=n_layers).to(device)
+train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, drop_last=True)
+eval_loader = DataLoader(eval_dataset, batch_size=8, shuffle=False, drop_last=True)
 
+model = LSTM(input_dim=14, hidden_dim=56, seq_len=window_size, output_dim=1, layers=1).to(device)
+
+lr = 1e-4
+epochs = 200
 # criterion = nn.MSELoss().to(device)
 criterion = weighted_mse_loss
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 train_hist = np.zeros(epochs)
+
 train_losses = []
 eval_losses = []
 count = 0
+patience = 10
 
-# train, eval
 for epoch in tqdm(range(epochs)):
 
     model.train()
     for batch_idx, samples in enumerate(train_loader):
         x_train, y_train = samples
+        model.reset_hidden_state()
         outputs = model(x_train)
         loss = criterion(outputs, y_train, device)
         optimizer.zero_grad()
@@ -149,6 +160,7 @@ for epoch in tqdm(range(epochs)):
         
     model.eval()
     for x_eval, y_eval in eval_loader:
+        model.reset_hidden_state()
         outputs = model(x_eval)
         loss = criterion(outputs, y_eval, device)
         eval_losses.append(loss.item())
@@ -162,17 +174,25 @@ for epoch in tqdm(range(epochs)):
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +
                         f'train_loss: {train_loss:.5f} ' +
                         f'valid_loss: {eval_loss:.5f}')
+  
+    if train_hist[epoch-1] < train_hist[epoch]:
+        count += 1
+        print(count)
+    if count >= patience:
+        print('\nEarly Stopping')
+        break
 
-# output result
 model.eval()
 with torch.no_grad():
+    model.reset_hidden_state()
     eval_result = model(evalX_tensor).detach().cpu().numpy()
+    model.reset_hidden_state()
     test_result = model(testX_tensor).detach().cpu().numpy()
 
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
     print(eval_df.shape)
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/gpt/gpt_withzero_w15_4_4_56_{epochs}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/w15_hidden56_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/w15_hidden56_{epochs}_test.csv', index=None)
     
