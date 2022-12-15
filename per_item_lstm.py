@@ -26,7 +26,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lr = 1e-4
 epochs = 100
 count = 0
-patience = 100
+patience = 10
 input_dim = 83
 hidden_dim = 256
 output_dim = 1
@@ -154,7 +154,7 @@ train_hist = np.zeros(epochs)
 
 train_losses = []
 eval_losses = []
-
+last_epoch = -1
 for epoch in tqdm(range(epochs)):
 
     model.train()
@@ -184,7 +184,7 @@ for epoch in tqdm(range(epochs)):
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +
                         f'train_loss: {train_loss:.5f} ' +
                         f'valid_loss: {eval_loss:.5f}')
-  
+    last_epoch = epoch
     if train_hist[epoch-1] < train_hist[epoch]:
         count += 1
         print(count)
@@ -202,6 +202,6 @@ with torch.no_grad():
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_test.csv', index=None)
    
