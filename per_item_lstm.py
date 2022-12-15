@@ -1,5 +1,8 @@
 
 import numpy as np
+import pandas as pd
+from pandas.api.types import CategoricalDtype
+
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import math
@@ -78,18 +81,7 @@ class LSTM(nn.Module):
         self.fc = nn.Sequential(nn.Linear(hidden_dim, (hidden_dim)//2),
                                 nn.ReLU(),
                                 nn.Linear((hidden_dim)//2, output_dim))
-        # self.mlp1 = nn.Sequential(
-        #     nn.Linear(hidden_dim, (hidden_dim)//2),
-        #     nn.ReLU(),
-        #     nn.Linear((hidden_dim)//2, output_dim)
-        # )
-
-        # self.mlp2 = nn.Sequential(
-        #     nn.Linear(seq_len, (seq_len)//2),
-        #     nn.ReLU(),
-        #     nn.Linear((seq_len)//2, output_dim)
-        # )
-
+  
     def reset_hidden_state(self):
         self.hidden = (
             torch.zeros(self.layers, self.seq_len, self.hidden_dim),
@@ -98,8 +90,7 @@ class LSTM(nn.Module):
     def forward(self, x):
         x, _status = self.lstm(x)
         x = self.fc(x[:, -1])
-        # x = self.mlp1(x)
-        # x = self.mlp2(x[:, :, 0])
+
         return x
 
 def weighted_mse_loss(result, target, device):
