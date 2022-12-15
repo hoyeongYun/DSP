@@ -24,7 +24,7 @@ np.random.seed(random_seed)
 window_size = 18
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lr = 1e-4
-epochs = 100
+epochs = 4
 count = 0
 patience = 10
 input_dim = 83
