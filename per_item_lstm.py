@@ -147,8 +147,8 @@ eval_loader = DataLoader(eval_dataset, batch_size=8, shuffle=False, drop_last=Tr
 # model
 model = LSTM(input_dim=input_dim, hidden_dim=hidden_dim, seq_len=window_size, output_dim=output_dim, layers=1).to(device)
 
-criterion = nn.MSELoss().to(device)
-# criterion = weighted_mse_loss
+# criterion = nn.MSELoss().to(device)
+criterion = weighted_mse_loss
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 train_hist = np.zeros(epochs)
 
