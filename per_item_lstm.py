@@ -106,6 +106,22 @@ item = 'King Crab'
 x = x_king_crab
 y = y_king_crab
 
+# x = x_keyboard
+# y = y_keyboard
+
+# x = x_steak
+# y = y_steak
+
+# x = x_mouse
+# y = y_mouse
+
+# x = x_shrimp
+# y = y_shrimp
+
+# x = x_phone_charger
+# y = y_phone_charger
+
+
 train_size = int(len(x) * 0.9)
 train_x = x[:train_size]
 train_y = y[:train_size]
