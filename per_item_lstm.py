@@ -26,7 +26,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lr = 1e-4
 epochs = 100
 count = 0
-patience = 15
+patience = 100
 input_dim = 83
 hidden_dim = 256
 output_dim = 1
@@ -204,4 +204,4 @@ with torch.no_grad():
 
     eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_eval.csv', index=None)
     test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_test.csv', index=None)
-    
+   
