@@ -12,63 +12,59 @@ import torch.nn as nn
 from torch.nn import Transformer
 from torch.utils.data import DataLoader, TensorDataset
 
-np.set_printoptions(linewidth=np.inf)
+# fix seed
 random_seed = 21
 torch.manual_seed(random_seed)
 torch.cuda.manual_seed(random_seed)
-# torch.cuda.manual_seed_all(random_seed) # if use multi-GPU
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 np.random.seed(random_seed)
-# random.seed(random_seed)
 
+# hyperparameters
+window_size = 18
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+lr = 1e-4
+epochs = 100
+count = 0
+patience = 15
+input_dim = 83
+hidden_dim = 256
+output_dim = 1
 
-data_df = pd.read_csv('/workspace/DSP/data/PREPROCESSED/Unbiased_Data.csv')
+# king crab
+x_king_crab = np.load('/workspace/DSP/data/INPUT/per_item/0_King Crab_input_x.npy')
+y_king_crab = np.load('/workspace/DSP/data/INPUT/per_item/0_King Crab_input_y.npy')
 
-data_df.Month = data_df.Month.astype(np.int16)
-data_df.Store = data_df.Store.astype(np.int16)
-data_df.Store_Owner = data_df.Store_Owner.astype(np.int16)
+# keyboard
+x_keyboard_1 = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_x_1.npy')
+x_keyboard_2 = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_x_2.npy')
+x_keyboard = np.concatenate([x_keyboard_1, x_keyboard_2])
+y_keyboard = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_y.npy')
 
-data_df.Latitude = data_df.Latitude.astype(np.float32)
-data_df.Longitude = data_df.Longitude.astype(np.float32)
+# steak
+x_steak = np.load('/workspace/DSP/data/INPUT/per_item/2_Steak_input_x.npy')
+y_steak = np.load('/workspace/DSP/data/INPUT/per_item/2_Steak_input_y.npy')
 
-data_df.Industry_Size = data_df.Industry_Size.astype(np.int16)
-data_df.Retail_Size = data_df.Retail_Size.astype(np.int16)
+# mouse
+x_mouse = np.load('/workspace/DSP/data/INPUT/per_item/3_Mouse_input_x.npy')
+y_mouse = np.load('/workspace/DSP/data/INPUT/per_item/3_Mouse_input_y.npy')
 
-data_df.Target_3_Month_Retail_Sum = data_df.Target_3_Month_Retail_Sum.astype(np.float32)
-data_df.Item_Store_Key = data_df.Item_Store_Key.astype(np.int16)
+# paint
+x_paint = np.load('/workspace/DSP/data/INPUT/per_item/4_Paint_input_x.npy')
+y_paint = np.load('/workspace/DSP/data/INPUT/per_item/4_Paint_input_y.npy')
 
-data_df.Sales_At_The_Month_Total = data_df.Sales_At_The_Month_Total.astype(np.float32)
-data_df.Sales_At_The_Month_Per_Item = data_df.Sales_At_The_Month_Per_Item.astype(np.float32)
-data_df.Sales_At_The_Month_Per_Item_Type = data_df.Sales_At_The_Month_Per_Item_Type.astype(np.float32)
+# shrimp
+x_shrimp = np.load('/workspace/DSP/data/INPUT/per_item/5_Shrimp_input_x.npy')
+y_shrimp = np.load('/workspace/DSP/data/INPUT/per_item/5_Shrimp_input_y.npy')
 
-data_df = data_df[['Item_Store_Key', 'Month', 'Store', 'Urban_Rural', 'Location_Cluster', 'Item_Type', 'Item', 'Industry_Size', 
-                    'Retail_Size', 'Target_3_Month_Retail_Sum', 'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type']]
-item_ord = ['Power Cord', 'Phone Charger', 'Ear Buds','Mouse', 'Keyboard', 'Milk','Eggs', 'Cereal', 
-            'Shrimp','Noodles', 'Steak', 'King Crab','Tape', 'Glue', 'Nails','Bracket', 'Brush', 'Paint']
-type_ord = ['Electronics', 'Grocery', 'Home Goods']
-item_ord_d = CategoricalDtype(categories = item_ord, ordered = True) 
-type_ord_d = CategoricalDtype(categories = type_ord, ordered = True) 
-data_df['Item'] = data_df['Item'].astype(item_ord_d)
-data_df['Item_Type'] = data_df['Item_Type'].astype(type_ord_d)
+# phone charger
+x_phone_charger_1 = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_x_1.npy')
+x_phone_charger_2 = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_x_2.npy')
+x_phone_charger = np.concatenate([x_phone_charger_1, x_phone_charger_2])
+y_phone_charger = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_y.npy')
 
-data_df = pd.get_dummies(data_df, columns = ['Urban_Rural', 'Item_Type', 'Location_Cluster'])
-
-TARGET_KEY = ['Target_3_Month_Retail_Sum']
-FEAT_KEY = ['Industry_Size', 'Retail_Size', 
-            'Sales_At_The_Month_Total', 'Sales_At_The_Month_Per_Item', 'Sales_At_The_Month_Per_Item_Type',  
-            'Location_Cluster_0', 'Location_Cluster_1', 'Location_Cluster_2', 'Location_Cluster_3',
-            'Item_Type_Electronics', 'Item_Type_Grocery', 'Item_Type_Home Goods', 
-              'Urban_Rural_Rural', 'Urban_Rural_Urban']
-
-window_size = 15
-
-x_1 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_1.npy')
-x_2 = np.load('/workspace/DSP/data/INPUT/window_15_input_x_2.npy')
-y = np.load('/workspace/DSP/data/INPUT/window_15_input_y.npy')
-x = np.concatenate([x_1, x_2])
-test_x = data_df[FEAT_KEY].to_numpy().reshape(11556, 87, len(FEAT_KEY))[:, -window_size:, :]
+# test input
+test_x = np.load('/workspace/DSP/data/INPUT/test_input_w18_83_x.npy')
 
 class LSTM(nn.Module):
     def __init__(self, input_dim, hidden_dim, seq_len, output_dim, layers):
@@ -90,7 +86,6 @@ class LSTM(nn.Module):
     def forward(self, x):
         x, _status = self.lstm(x)
         x = self.fc(x[:, -1])
-
         return x
 
 def weighted_mse_loss(result, target, device):
@@ -99,42 +94,50 @@ def weighted_mse_loss(result, target, device):
     weight = torch.FloatTensor(np.where(target.cpu().detach().numpy() < 1.0, w_zero, np.exp(target.cpu().detach().numpy() / max_target_val))).to(device)
     return torch.sum(weight * (result - target) ** 2)
 
-# 일단 scaling 안하고
+# which item
+item = 'King Crab' 
+        #  'Keyboard'
+        #  'Steak'
+        #  'Mouse'
+        #  'Paint'
+        #  'Shrimp'
+        #  'Phone Charger'
 
-train_size = int(len(x) * 0.8)
+x = x_king_crab
+y = y_king_crab
+
+train_size = int(len(x) * 0.9)
 train_x = x[:train_size]
 train_y = y[:train_size]
 
 eval_x = x[train_size:]
 eval_y = y[train_size:]
 
+# input tensor
 trainX_tensor = torch.FloatTensor(train_x).to(device)
 trainY_tensor = torch.FloatTensor(train_y).to(device)
-
 evalX_tensor = torch.FloatTensor(eval_x).to(device)
 evalY_tensor = torch.FloatTensor(eval_y).to(device)
-
 testX_tensor = torch.FloatTensor(test_x).to(device)
 
+# dataset
 train_dataset = TensorDataset(trainX_tensor, trainY_tensor)
 eval_dataset = TensorDataset(evalX_tensor, evalY_tensor)
 
+# dataloader
 train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, drop_last=True)
 eval_loader = DataLoader(eval_dataset, batch_size=8, shuffle=False, drop_last=True)
 
-model = LSTM(input_dim=14, hidden_dim=56, seq_len=window_size, output_dim=1, layers=1).to(device)
+# model
+model = LSTM(input_dim=input_dim, hidden_dim=hidden_dim, seq_len=window_size, output_dim=output_dim, layers=1).to(device)
 
-lr = 1e-4
-epochs = 200
-# criterion = nn.MSELoss().to(device)
-criterion = weighted_mse_loss
+criterion = nn.MSELoss().to(device)
+# criterion = weighted_mse_loss
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 train_hist = np.zeros(epochs)
 
 train_losses = []
 eval_losses = []
-count = 0
-patience = 10
 
 for epoch in tqdm(range(epochs)):
 
@@ -181,9 +184,8 @@ with torch.no_grad():
     test_result = model(testX_tensor).detach().cpu().numpy()
 
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
-    print(eval_df.shape)
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/w15_hidden56_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/unbiased/w15_hidden56_{epochs}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_test.csv', index=None)
     
