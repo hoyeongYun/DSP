@@ -33,9 +33,12 @@ window_size = 18
 n_heads = 4             ##
 n_layers = 4            #
 split_frac = 0.95       #
-lr = 3e-4               #
+lr = 1e-3               #
 epochs = 100            #
 batch_size = 48
+count = 0
+patience = 9
+
 
 # load data
 x = np.load('/workspace/DSP/data/INPUT/final/final_input_187629_18_9_x.npy')
@@ -76,6 +79,7 @@ model = GPT_MLP_MODEL(in_features=in_features,
 # criterion = nn.MSELoss().to(device)
 criterion = weighted_mse_loss
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+train_hist = np.zeros(epochs)
 train_losses = []
 eval_losses = []
 
@@ -105,6 +109,12 @@ for epoch in tqdm(range(epochs)):
     print('\n')
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' + f'train_loss: {train_loss:.5f} ' + f'valid_loss: {eval_loss:.5f}')
 
+    if train_hist[epoch-1] < train_hist[epoch]:
+        count += 1
+        print(count)
+    if count >= patience:
+        print('\nEarly Stopping')
+        break
 # output result
 model.eval()
 with torch.no_grad():
@@ -119,6 +129,6 @@ with torch.no_grad():
     # eval_df = pd.DataFrame(eval_result)       # 코랩에 eval_y 3개월 합친 거 vs 예측 3개월치 합친거 비교 코드 만들기 이때 각 월에서 int로 바꾸고 합칠건지 합치고 바꿀건지 결정도 해야됨
     # test_df = pd.DataFrame(test_result)
 
-    eval_df.to_csv(f'/workspace/DSP/result/final/ver_1/full_window_{lr}_{split_frac}_{inter_dim}_{n_heads}_{eval_loss:.5f}_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/final/ver_1/full_window_{lr}_{split_frac}_{inter_dim}_{n_heads}_{epochs}_test.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/final/ver_1/{lr}_{split_frac}_{inter_dim}_{n_heads}_{eval_loss:.5f}_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/final/ver_1/{lr}_{split_frac}_{inter_dim}_{n_heads}_{epochs}_test.csv', index=None)
     
