@@ -24,11 +24,11 @@ np.random.seed(random_seed)
 window_size = 18
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lr = 1e-4
-epochs = 4
+epochs = 70
 count = 0
-patience = 10
-input_dim = 83
-hidden_dim = 256
+patience = 100
+input_dim = 9
+hidden_dim = 56
 output_dim = 1
 
 # king crab
@@ -36,9 +36,7 @@ x_king_crab = np.load('/workspace/DSP/data/INPUT/per_item/0_King Crab_input_x.np
 y_king_crab = np.load('/workspace/DSP/data/INPUT/per_item/0_King Crab_input_y.npy')
 
 # keyboard
-x_keyboard_1 = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_x_1.npy')
-x_keyboard_2 = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_x_2.npy')
-x_keyboard = np.concatenate([x_keyboard_1, x_keyboard_2])
+x_keyboard = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_x.npy')
 y_keyboard = np.load('/workspace/DSP/data/INPUT/per_item/1_Keyboard_input_y.npy')
 
 # steak
@@ -58,13 +56,11 @@ x_shrimp = np.load('/workspace/DSP/data/INPUT/per_item/5_Shrimp_input_x.npy')
 y_shrimp = np.load('/workspace/DSP/data/INPUT/per_item/5_Shrimp_input_y.npy')
 
 # phone charger
-x_phone_charger_1 = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_x_1.npy')
-x_phone_charger_2 = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_x_2.npy')
-x_phone_charger = np.concatenate([x_phone_charger_1, x_phone_charger_2])
+x_phone_charger = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_x.npy')
 y_phone_charger = np.load('/workspace/DSP/data/INPUT/per_item/6_Phone Charger_input_y.npy')
 
 # test input
-test_x = np.load('/workspace/DSP/data/INPUT/test_input_w18_83_x.npy')
+test_x = np.load('/workspace/DSP/data/INPUT/test_input_w18_9_x.npy')
 
 class LSTM(nn.Module):
     def __init__(self, input_dim, hidden_dim, seq_len, output_dim, layers):
@@ -96,12 +92,12 @@ def weighted_mse_loss(result, target, device):
 
 # which item
 item = 'King Crab' 
-        #  'Keyboard'
-        #  'Steak'
-        #  'Mouse'
-        #  'Paint'
-        #  'Shrimp'
-        #  'Phone Charger'
+# item = 'Keyboard'
+# item = 'Steak'
+# item = 'Mouse'
+# item = 'Paint'
+# item = 'Shrimp'
+# item = 'Phone Charger'
 
 x = x_king_crab
 y = y_king_crab
@@ -114,6 +110,9 @@ y = y_king_crab
 
 # x = x_mouse
 # y = y_mouse
+
+# x = x_paint
+# y = y_paint
 
 # x = x_shrimp
 # y = y_shrimp
@@ -155,6 +154,8 @@ train_hist = np.zeros(epochs)
 train_losses = []
 eval_losses = []
 last_epoch = -1
+last_val_loss = -1
+print(f'{item}_{lr}_{hidden_dim} case start')
 for epoch in tqdm(range(epochs)):
 
     model.train()
@@ -182,8 +183,8 @@ for epoch in tqdm(range(epochs)):
     epoch_len = len(str(epoch))
     print('\n')
     print(f'[{epoch:>{epoch_len}}/{epochs:>{epoch_len}}] ' +
-                        f'train_loss: {train_loss:.5f} ' +
-                        f'valid_loss: {eval_loss:.5f}')
+                        f'train_loss: {train_loss:.8f} ' +
+                        f'valid_loss: {eval_loss:.8f}')
     last_epoch = epoch
     if train_hist[epoch-1] < train_hist[epoch]:
         count += 1
@@ -202,6 +203,6 @@ with torch.no_grad():
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_eval.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_{eval_loss}eval.csv', index=None)
     test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_test.csv', index=None)
    
