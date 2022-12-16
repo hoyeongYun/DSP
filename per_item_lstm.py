@@ -24,9 +24,9 @@ np.random.seed(random_seed)
 window_size = 18
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 lr = 1e-4
-epochs = 100
+epochs = 70
 count = 0
-patience = 5
+patience = 100
 input_dim = 9
 hidden_dim = 56
 output_dim = 1
@@ -91,25 +91,28 @@ def weighted_mse_loss(result, target, device):
     return torch.sum(weight * (result - target) ** 2)
 
 # which item
-        # 'King Crab' 
-item = 'Keyboard'
-        #  'Steak'
-        #  'Mouse'
-        #  'Paint'
-        #  'Shrimp'
-        #  'Phone Charger'
+item = 'King Crab' 
+# item = 'Keyboard'
+# item = 'Steak'
+# item = 'Mouse'
+# item = 'Paint'
+# item = 'Shrimp'
+# item = 'Phone Charger'
 
-# x = x_king_crab
-# y = y_king_crab
+x = x_king_crab
+y = y_king_crab
 
-x = x_keyboard
-y = y_keyboard
+# x = x_keyboard
+# y = y_keyboard
 
 # x = x_steak
 # y = y_steak
 
 # x = x_mouse
 # y = y_mouse
+
+# x = x_paint
+# y = y_paint
 
 # x = x_shrimp
 # y = y_shrimp
@@ -151,6 +154,8 @@ train_hist = np.zeros(epochs)
 train_losses = []
 eval_losses = []
 last_epoch = -1
+last_val_loss = -1
+print(f'{item}_{lr}_{hidden_dim} case start')
 for epoch in tqdm(range(epochs)):
 
     model.train()
@@ -198,6 +203,6 @@ with torch.no_grad():
     eval_df = pd.DataFrame(eval_result.reshape(-1, 1))
     test_df = pd.DataFrame(test_result.reshape(-1, 1))
 
-    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_eval.csv', index=None)
+    eval_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_{eval_loss}eval.csv', index=None)
     test_df.to_csv(f'/workspace/DSP/result/unbiased/per_item/{item}/{item}_{lr}_{hidden_dim}_{last_epoch}_test.csv', index=None)
    
