@@ -28,21 +28,21 @@ STORES = 642
 ITEM_STORES = 11556
 in_features = 9
 out_features = 3
-inter_dim = 56          #
+inter_dim = 56          ###
 window_size = 18
-n_heads = 4             #
+n_heads = 4             ##
 n_layers = 4            #
 split_frac = 0.95       #
-lr = 1e-4               #
-epochs = 50             #
+lr = 3e-4               #
+epochs = 100            #
 batch_size = 48
 
 # load data
-x = np.load('/workspace/DSP/data/INPUT/final/.npy')
-y = np.load('/workspace/DSP/data/INPUT/final/.npy')
-
+x = np.load('/workspace/DSP/data/INPUT/final/final_input_187629_18_9_x.npy')
+y = np.load('/workspace/DSP/data/INPUT/final/final_input_187629_18_3_y.npy')
+# y = y[:, -1, :]
 # test input # test 새로 생성 해야 됨
-test_x = np.load('/workspace/DSP/data/INPUT/test_input_w18_9_x.npy')        #
+test_x = np.load('/workspace/DSP/data/INPUT/final/test_input_x_final.npy')  # 11556, 18, 9
 
 # train eval split
 train_x = x[:int(len(x)*split_frac)]
@@ -108,12 +108,17 @@ for epoch in tqdm(range(epochs)):
 # output result
 model.eval()
 with torch.no_grad():
-    eval_result = model(evalX_tensor).detach().cpu().numpy()
-    test_result = model(testX_tensor).detach().cpu().numpy()
+    eval_result = model(evalX_tensor).detach().cpu().numpy()        # B x 18 x 3        or B x 3
+    test_result = model(testX_tensor).detach().cpu().numpy()        # 11556 x 18 x 3    or 11556 x 3
 
-    eval_df = pd.DataFrame(eval_result.reshape(-1, out_features))       # 코랩에 eval_y 3개월 합친 거 vs 예측 3개월치 합친거 비교 코드 만들기 이때 각 월에서 int로 바꾸고 합칠건지 합치고 바꿀건지 결정도 해야됨
-    test_df = pd.DataFrame(test_result.reshape(-1, out_features))
+    # for ver_1
+    eval_df = pd.DataFrame(eval_result[:, -1, :].reshape(-1, out_features))       # 코랩에 eval_y 3개월 합친 거 vs 예측 3개월치 합친거 비교 코드 만들기 이때 각 월에서 int로 바꾸고 합칠건지 합치고 바꿀건지 결정도 해야됨
+    test_df = pd.DataFrame(test_result[:, -1, :].reshape(-1, out_features))
 
-    eval_df.to_csv(f'/workspace/DSP/result/final/full_window_{}_{eval_loss:.5f}_{epochs}_eval.csv', index=None)
-    test_df.to_csv(f'/workspace/DSP/result/final/full_window_{}_{}_{epochs}_test.csv', index=None)
+    # for ver_2
+    # eval_df = pd.DataFrame(eval_result)       # 코랩에 eval_y 3개월 합친 거 vs 예측 3개월치 합친거 비교 코드 만들기 이때 각 월에서 int로 바꾸고 합칠건지 합치고 바꿀건지 결정도 해야됨
+    # test_df = pd.DataFrame(test_result)
+
+    eval_df.to_csv(f'/workspace/DSP/result/final/ver_1/full_window_{lr}_{split_frac}_{inter_dim}_{n_heads}_{eval_loss:.5f}_{epochs}_eval.csv', index=None)
+    test_df.to_csv(f'/workspace/DSP/result/final/ver_1/full_window_{lr}_{split_frac}_{inter_dim}_{n_heads}_{epochs}_test.csv', index=None)
     

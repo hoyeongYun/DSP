@@ -45,4 +45,5 @@ class GPT_MLP_MODEL(nn.Module):
                                 past_key_values=None,           
                                 position_ids=position_ids)
         output = self.decoder(outputs.last_hidden_state[:, :, :])        # [B, inter_dim] -> [B, out_features]
+        # output = self.decoder(outputs.last_hidden_state[:, -1, :])
         return output
